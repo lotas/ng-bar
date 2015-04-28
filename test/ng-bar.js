@@ -1,13 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function(){
 	var utils = require('./utils.js');
-	var cssString = "#ng-bar {\n\twidth:100%;\n\theight: 32px;\n\tposition:fixed;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tpadding:0 40px 10px 0;\n\tborder:1px solid #11163E;\n\tbackground-color: #D6F3FF;\n}\n\n#ng-bar>div {\n\tpadding: 2px 10px; \n\tfont-size: 12px;\n\tdisplay: inline-block;\n\tmargin-right: 10px;\n}";
+	
+	var cssString = "#ng-bar {\n\twidth:100%;\n\theight: 24px;\n\tposition:fixed;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tpadding:0 40px 10px 0;\n\tborder:1px solid #11163E;\n\tbackground-color: #D6F3FF;\n\tfont-family: Verdana;\n}\n\n#ng-bar>div {\n\tpadding: 2px 10px;\n\tfont-size: 12px;\n\tdisplay: block;\n\tfloat: left;\n\tborder-right: 1px solid #000;\n}\n#ng-bar h4 {\n\tmargin: 8px 8px;\n}\n#ng-bar .logo {\n\tfloat: right;\n\tcolor: ##627E96;\n}";
 
 	// var _ = require('lodash');
 
 	var ngBarPlugins = [
 		require('./plugins/angular-info.js'),
 		require('./plugins/memory-usage.js'),
+		require('./plugins/scope-count.js'),
 		require('./plugins/scope-watches.js')
 	];
 
@@ -17,6 +19,7 @@
 
 
 	function NgBar() {}
+	NgBar.prototype.version = '1.0.0';
 
 	NgBar.prototype.init = function() {		
 		this._createContainer();
@@ -31,6 +34,11 @@
 		this._container = document.createElement('div');
 		this._container.id = 'ng-bar';
 		body.appendChild(this._container);
+
+		var logo = document.createElement('div');
+		logo.className = 'logo';
+		logo.innerHTML = '<h4><a href="http://yaraslav.com/ng-bar">ng-bar ' + this.version + '</a></h4>';
+		this._container.appendChild(logo);
 
 		this._styles = document.createElement('style');
 		this._styles.innerHTML = cssString;
@@ -57,7 +65,7 @@
 	window.NgBar = new NgBar();
 	window.NgBar.init();
 })();
-},{"./plugins/angular-info.js":2,"./plugins/memory-usage.js":3,"./plugins/scope-watches.js":4,"./utils.js":5}],2:[function(require,module,exports){
+},{"./plugins/angular-info.js":2,"./plugins/memory-usage.js":3,"./plugins/scope-count.js":4,"./plugins/scope-watches.js":5,"./utils.js":6}],2:[function(require,module,exports){
 var AngularInfoPlugin = {
 	init: initPlugin
 };
@@ -76,7 +84,7 @@ var MemoryUsagePlugin = {
 };
 
 function initPlugin(elm) {
-	elm.innerHTML = '<b>Memory</b>';
+	elm.innerHTML = '<h4>Memory</h4>';
 }
 
 if (typeof module !== "undefined" && module.exports) {
@@ -84,19 +92,47 @@ if (typeof module !== "undefined" && module.exports) {
 }
 
 },{}],4:[function(require,module,exports){
+var utils = require('../utils.js')();
+
+var ScopeCountPlugin = {
+	init: initPlugin
+};
+
+function initPlugin(elm) {
+	elm.innerHTML = '<h4>Scopes: <span id="ngbar-scopes">...</span></h4>';
+
+	setTimeout(function calcThem(){
+		document.getElementById('ngbar-scopes').innerHTML = utils.getScopesCount();
+		setTimeout(calcThem, 1000);
+	}, 1000);
+}
+
+if (typeof module !== "undefined" && module.exports) {
+	module.exports = ScopeCountPlugin;
+}
+
+},{"../utils.js":6}],5:[function(require,module,exports){
+var utils = require('../utils.js')();
+
 var ScopeWatchesPlugin = {
 	init: initPlugin
 };
 
 function initPlugin(elm) {
-	elm.innerHTML = 'Watches: <b>333</b>';
+	elm.innerHTML = '<h4>Watchers: <span id="ngbar-watches">...</span></h4>';
+
+	setTimeout(function calcThem(){
+		document.getElementById('ngbar-watches').innerHTML = utils.getWatchersCount();
+		setTimeout(calcThem, 1000);
+	}, 1000);
+
 }
 
 if (typeof module !== "undefined" && module.exports) {
 	module.exports = ScopeWatchesPlugin;
 }
 
-},{}],5:[function(require,module,exports){
+},{"../utils.js":6}],6:[function(require,module,exports){
 var NgBarUtils = function() {
 	var angular = window.angular;
 
@@ -111,18 +147,107 @@ var NgBarUtils = function() {
 		},
 
 		getScopesCount: function() {
-			// iterate scopes
+			var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
+
+			var cnt = 0;
+			iterateScopes(rootScope, function(scope) {
+				cnt++;
+			});
+			return cnt;
 		},
 
 		getWatchersCount: function() {
-			// iterate scopes
-			return _getRootElm().scope().$$watchers.length;
+			var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
+
+		    var count = 0;
+		    iterateScopes(rootScope, function(scope) {
+		      count += getWatchersFromScope(scope).length;
+		    });
+
+			return count;
 		},
 
 		getService: function(service) {
 			return _getRootElm().injector().get(service);
 		}
 	};
+
+
+	// taken from ng-stats
+  function getWatchersFromScope(scope) {
+    return scope && scope.$$watchers ? scope.$$watchers : [];
+  }
+  function iterateScopes(current, fn) {
+    if (typeof current === 'function') {
+      fn = current;
+      current = null;
+    }
+    current = current || getRootScope();
+    current = _makeScopeReference(current);
+    if (!current) {
+      return;
+    }
+    var ret = fn(current);
+    if (ret === false) {
+      return ret;
+    }
+    return iterateChildren(current, fn);
+  }
+
+  function iterateSiblings(start, fn) {
+    var ret;
+    while (!!(start = start.$$nextSibling)) {
+      ret = fn(start);
+      if (ret === false) {
+        break;
+      }
+
+      ret = iterateChildren(start, fn);
+      if (ret === false) {
+        break;
+      }
+    }
+    return ret;
+  }
+
+  function iterateChildren(start, fn) {
+    var ret;
+    while (!!(start = start.$$childHead)) {
+      ret = fn(start);
+      if (ret === false) {
+        break;
+      }
+
+      ret = iterateSiblings(start, fn);
+      if (ret === false) {
+        break;
+      }
+    }
+    return ret;
+  }
+
+
+  function getScopeById(id) {
+    var myScope = null;
+    iterateScopes(function(scope) {
+      if (scope.$id === id) {
+        myScope = scope;
+        return false;
+      }
+    });
+    return myScope;
+  }
+
+  function _makeScopeReference(scope) {
+    if (_isScopeId(scope)) {
+      scope = getScopeById(scope);
+    }
+    return scope;
+  }
+
+  function _isScopeId(scope) {
+    return typeof scope === 'string' || typeof scope === 'number';
+  }
 };
 
 if (typeof module !== "undefined" && module.exports) {

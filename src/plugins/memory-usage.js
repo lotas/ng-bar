@@ -3,7 +3,7 @@ var MemoryUsagePlugin = {
 };
 
 function initPlugin(elm) {
-	elm.innerHTML = '<b>Memory</b>';
+	elm.innerHTML = '<h4>Memory</h4>';
 }
 
 if (typeof module !== "undefined" && module.exports) {

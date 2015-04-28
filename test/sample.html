@@ -28,6 +28,13 @@
       
       <input type="submit" value="Submit"/>
     </form>
+
+    <div >
+      <ol ng-init="items = ['one', 'two', 'three']">
+        <li ng-repeat="name in items">{{name}}</li>
+      </ol>
+      <a ng-click="items.push(items.length);">Add more</a>
+    </div>
     
     <div>
       <h4>Form values:</h4>

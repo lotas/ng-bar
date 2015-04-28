@@ -1,12 +1,14 @@
 (function(){
 	var utils = require('./utils.js');
-	var cssString = require('fs').readFileSync(__dirname + '/ng-bar.css', 'utf8');
+	var fs = require('fs');
+	var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
 
 	// var _ = require('lodash');
 
 	var ngBarPlugins = [
 		require('./plugins/angular-info.js'),
 		require('./plugins/memory-usage.js'),
+		require('./plugins/scope-count.js'),
 		require('./plugins/scope-watches.js')
 	];
 
@@ -16,6 +18,7 @@
 
 
 	function NgBar() {}
+	NgBar.prototype.version = '1.0.0';
 
 	NgBar.prototype.init = function() {		
 		this._createContainer();
@@ -30,6 +33,11 @@
 		this._container = document.createElement('div');
 		this._container.id = 'ng-bar';
 		body.appendChild(this._container);
+
+		var logo = document.createElement('div');
+		logo.className = 'logo';
+		logo.innerHTML = '<h4><a href="http://yaraslav.com/ng-bar">ng-bar ' + this.version + '</a></h4>';
+		this._container.appendChild(logo);
 
 		this._styles = document.createElement('style');
 		this._styles.innerHTML = cssString;
