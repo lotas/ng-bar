@@ -1,0 +1,24 @@
+{
+  "name": "ng-bar",
+  "version": "0.0.1",
+  "authors": [
+    "Yaraslau Kurmyza <me@yaraslav.com>"
+  ],
+  "description": "Angular Debug Toolbar",
+  "main": "ng-bar.js",
+  "keywords": [
+    "angular",
+    "debug",
+    "toolbar",
+    "profiler"
+  ],
+  "license": "MIT",
+  "homepage": "yaraslav.com/ng-bar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

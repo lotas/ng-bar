@@ -1,0 +1,18 @@
+#ng-bar {
+	width:100%;
+	height: 32px;
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+	padding:0 40px 10px 0;
+	border:1px solid #11163E;
+	background-color: #D6F3FF;
+}
+
+#ng-bar>div {
+	padding: 2px 10px; 
+	font-size: 12px;
+	display: inline-block;
+	margin-right: 10px;
+}

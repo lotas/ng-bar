@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app>
+
+  <head>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.2/angular.js"></script>
+    <style>
+      .red {color:red};
+    </style>
+  </head>
+
+  <body>
+    <h1>Hello Angular</h1>
+    
+    <p>Please fill out <b>Email</b> and <b>Name</b> fields</p>
+    <p>Why is name not shown?</p>
+    
+    
+    <form name="myForm">
+      <div>
+        <input type="text" ng-model="email" placeholder="email" />
+      </div>
+      <div>
+        <label><input type="checkbox" ng-model="showName" /> Show name</label>
+      </div>
+      <div>
+        <input type="text" ng-model="name" placeholder="name" ng-if="showName" />
+      </div>
+      
+      <input type="submit" value="Submit"/>
+    </form>
+    
+    <div>
+      <h4>Form values:</h4>
+      <ul>
+        <li class="red">Name: {{ name }}</li>
+        <li>Email: {{ email }}</li>
+      </ul>
+    </div>
+    
+    <script type="text/javascript" src="ng-bar.js"></script>
+  </body>
+</html>
