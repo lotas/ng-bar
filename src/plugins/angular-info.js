@@ -8,8 +8,7 @@ function initPlugin(elm) {
 		var mainModule = utils.guessMainModule();
 		var deps = buildDeps(mainModule);
 
-		elm.innerHTML = '<h4 title="'+angular.version.codeName+'">ng ' + angular.version.full + 
-			 ' <span class="ngbar-app-name">App: <strong>' + mainModule + '</strong></h4>' + 
+		elm.innerHTML = '<h4>ng-app <span class="ngbar-app-name"><strong>' + mainModule + '</strong></h4>' + 
 			 '<div class="sub" id="ngbar-app-deps">' + deps + '</div>' + 
 			 '<div class="sub" style="display: none;" id="ngbar-app-services"><ul id="ngbar-app-services-details"></ul></div>';
 

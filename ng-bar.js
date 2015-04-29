@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js')();
     
-    var cssString = "#ng-bar-wrap {\n\twidth: 100%;\n\tposition: fixed;\n\tbottom: 0px;\n\tz-index: 9999;\n\theight: 32px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n\tborder:1px solid #11163E;\n\tbackground-color: #D6F3FF;\n\n/*\twidth:100%;\n\theight: 24px;\n\tposition:fixed;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tpadding:0 40px 10px 0;\n\tfont-family: Verdana;*/\n}\n#ng-bar {\n\tmargin-bottom: 28px;\n}\n\n#ng-bar>div {\n\tpadding: 2px 10px;\n\tfont-size: 12px;\n\tdisplay: block;\n\tfloat: left;\n\tborder-right: 1px solid #000;\n\tposition: relative;\n\tcursor: pointer;\n}\n#ng-bar h4 {\n\tmargin: 8px 8px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n}\n#ng-bar .logo {\n\tfloat: right;\n\tcolor: ##627E96;\n}\n#ng-bar .ngbar-app-name {\n\tmargin-left: 8px;\n}\n\n#ng-bar .sub {\n\tdisplay: none;\n\tposition: absolute;\n\tbottom: 32px;\n\tleft: 0;\n\tmargin-bottom: 2px;\n\tborder: 1px solid #ccc;\n\tmax-height: 300px;\n\tmin-height: 40px;\n\tmin-width: 180px;\n\toverflow-y: auto;\n\tbackground: #fff;\n\tpadding-right:20px;\n}\n#ng-bar .active {\n\tbackground: #C9E7F4;\n}\n#ng-bar .active .sub {\n\tdisplay: block;\n}\n\n#ng-bar .ng-bar-plugin {\n\t\n}\n#ng-bar .sub ul {\n\tpadding-left: 15px;\n}\n#ng-bar .sub li { \n\tlist-style-type: none;\n\twhite-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n\tcontent: '▶';\n\tfloat: right;\n}\n#ng-bar .hidden {\n\tdisplay: none;\n}\n#ng-bar .cnt {\n\tfont-weight: bold;\n\tpaddin-left: 10px;\n\tcolor: #302F31;\n}";
+    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #ccc;\n  border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-y: auto;\n  background: #fff;\n  padding-right:20px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}";
 
     // var _ = require('lodash');
 
@@ -31,7 +31,8 @@
      */
     NgBar.prototype._createContainer = function() {
         var body = document.getElementsByTagName('body')[0],
-            wrap = document.createElement('div');
+            wrap = document.createElement('div'),
+            self = this;
 
         wrap.id = 'ng-bar-wrap';
         body.appendChild(wrap);
@@ -42,8 +43,17 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4><a href="https://github.com/lotas/ng-bar">ng-bar ' + this.version + '</a></h4>';
+        logo.innerHTML = '<h4>angular.js v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
         this._container.appendChild(logo);
+
+        var onoff = document.createElement('div');
+        onoff.id = 'ng-bar-onoff';
+        onoff.innerHTML = '&lt;';
+        body.appendChild(onoff);
+        angular.element(onoff).on('click', function(){
+            onoff.innerHTML = onoff.innerHTML === '&lt;' ? '&gt;' : '&lt;';
+            angular.element(wrap).toggleClass('hidden');
+        });
 
         var _styles = document.createElement('style');
         _styles.innerHTML = cssString;
@@ -98,8 +108,7 @@ function initPlugin(elm) {
 		var mainModule = utils.guessMainModule();
 		var deps = buildDeps(mainModule);
 
-		elm.innerHTML = '<h4 title="'+angular.version.codeName+'">ng ' + angular.version.full + 
-			 ' <span class="ngbar-app-name">App: <strong>' + mainModule + '</strong></h4>' + 
+		elm.innerHTML = '<h4>ng-app <span class="ngbar-app-name"><strong>' + mainModule + '</strong></h4>' + 
 			 '<div class="sub" id="ngbar-app-deps">' + deps + '</div>' + 
 			 '<div class="sub" style="display: none;" id="ngbar-app-services"><ul id="ngbar-app-services-details"></ul></div>';
 
@@ -243,7 +252,8 @@ function initPlugin(elm) {
 
     setTimeout(function(){
         
-
+    	// coming up next..
+    	// 
     }, 1000);
 }
 

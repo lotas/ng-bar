@@ -30,7 +30,8 @@
      */
     NgBar.prototype._createContainer = function() {
         var body = document.getElementsByTagName('body')[0],
-            wrap = document.createElement('div');
+            wrap = document.createElement('div'),
+            self = this;
 
         wrap.id = 'ng-bar-wrap';
         body.appendChild(wrap);
@@ -41,8 +42,17 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4><a href="https://github.com/lotas/ng-bar">ng-bar ' + this.version + '</a></h4>';
+        logo.innerHTML = '<h4>angular.js v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
         this._container.appendChild(logo);
+
+        var onoff = document.createElement('div');
+        onoff.id = 'ng-bar-onoff';
+        onoff.innerHTML = '&lt;';
+        body.appendChild(onoff);
+        angular.element(onoff).on('click', function(){
+            onoff.innerHTML = onoff.innerHTML === '&lt;' ? '&gt;' : '&lt;';
+            angular.element(wrap).toggleClass('hidden');
+        });
 
         var _styles = document.createElement('style');
         _styles.innerHTML = cssString;
