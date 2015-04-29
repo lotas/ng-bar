@@ -1,66 +1,94 @@
 var NgBarUtils = function() {
-	var angular = window.angular;
+  var angular = window.angular;
 
-	function _getRootElm() {
-		return angular.element(document.querySelector('.ng-scope'));
-	}
-
-
-	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-	var precision;
-	var i;
-	function bytesToSize( bytes, nFractDigit ){
-		if (bytes === 0) {
-			return 'n/a';
-		}
-		nFractDigit	= nFractDigit !== undefined ? nFractDigit : 0;
-		precision = Math.pow(10, nFractDigit);
-		i = Math.floor(Math.log(bytes) / Math.log(1024));
-		return Math.round(bytes*precision / Math.pow(1024, i))/precision + ' ' + sizes[i];
-	}
+  function _getRootElm() {
+    return angular.element(document.querySelector('.ng-scope'));
+  }
 
 
-	return {
-		
-		getAngularVersion: function() {
-			return angular.version.full;
-		},
+  var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  var precision;
+  var i;
+  function bytesToSize( bytes, nFractDigit ){
+    if (bytes === 0) {
+      return 'n/a';
+    }
+    nFractDigit = nFractDigit !== undefined ? nFractDigit : 0;
+    precision = Math.pow(10, nFractDigit);
+    i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return Math.round(bytes*precision / Math.pow(1024, i))/precision + ' ' + sizes[i];
+  }
 
-		getScopesCount: function() {
-			var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
 
-			var cnt = 0;
-			iterateScopes(rootScope, function(scope) {
-				cnt++;
-			});
-			return cnt;
-		},
+  return {
 
-		getWatchersCount: function() {
-			var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
+    guessMainModule: function() {
+      return document.querySelector('[ng-app]').attributes['ng-app'].value;
+    },
+    
+    /**
+     * Get number of scopes and watchers
+     * 
+     * @return {Object} {count: int, watchers: int}
+     */
+    getScopesInfo: function() {
+      var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
 
-		    var count = 0;
-		    iterateScopes(rootScope, function(scope) {
-		      count += getWatchersFromScope(scope).length;
-		    });
+      var cnt = 0,
+          watchers = 0;
 
-			return count;
-		},
+      iterateScopes(rootScope, function(scope) {
+        cnt++;
+        watchers += getWatchersFromScope(scope).length;
+      });
 
-		getService: function(service) {
-			return _getRootElm().injector().get(service);
-		},
+      return {count: cnt, watchers: watchers};
+    },
 
-		getMemUsage: function() {
-			if (window.performance && window.performance.memory) {
-				return bytesToSize(window.performance.memory.totalJSHeapSize);
-			} else {
-				return 'performance.memory missing';
-			}
-		}
-	};
+    getService: function(service) {
+      return _getRootElm().injector().get(service);
+    },
 
-	// taken from ng-stats
+    getMemUsage: function() {
+      if (window.performance && window.performance.memory) {
+        return bytesToSize(window.performance.memory.totalJSHeapSize);
+      } else {
+        return 'performance.memory missing';
+      }
+    },
+
+    /**
+     * Get the list of all services
+     * @type {[type]}
+     */
+    enumerateServices: enumerateAllServices,
+
+    enumerateModuleDeps: function(mod) {
+      try {
+        return angular.module(mod).requires;
+      } catch (e) {
+        return [];
+      }
+    }
+  };
+
+  function enumerateAllServices(mod, r) {
+    var inj = angular.element(document).injector().get;
+
+    if (!r) r = {};
+
+    angular.forEach(angular.module(mod).requires, function(m) {
+      enumerateAllServices(m,r);
+    });
+    angular.forEach(angular.module(mod)._invokeQueue, function(a) {
+      try { 
+        r[a[2][0]] = inj(a[2][0]); 
+      } catch (e) {}
+    });
+    return r;
+  }
+
+  // taken from ng-stats
   function getWatchersFromScope(scope) {
     return scope && scope.$$watchers ? scope.$$watchers : [];
   }
@@ -138,5 +166,5 @@ var NgBarUtils = function() {
 };
 
 if (typeof module !== "undefined" && module.exports) {
-	module.exports = NgBarUtils;
+  module.exports = NgBarUtils;
 }

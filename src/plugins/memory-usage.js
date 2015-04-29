@@ -4,6 +4,12 @@ var MemoryUsagePlugin = {
 	init: initPlugin
 };
 
+/**
+ * Chrome only
+ * Chrome uses non-standard window.performance.memory
+ * May be required to use --enable-precise-memory-info flag.
+ * [chrome.executable] --args --enable-precise-memory-info 
+ */
 function initPlugin(elm) {
 	elm.innerHTML = '<h4><span id="ngbar-mem">...</span></h4>';
 

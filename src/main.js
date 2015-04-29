@@ -1,70 +1,82 @@
 (function(){
-	var utils = require('./utils.js');
-	var fs = require('fs');
-	var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
+    var utils = require('./utils.js');
+    var fs = require('fs');
+    var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
 
-	// var _ = require('lodash');
+    // var _ = require('lodash');
 
-	var ngBarPlugins = [
-		require('./plugins/angular-info.js'),
-		require('./plugins/memory-usage.js'),
-		require('./plugins/scope-count.js'),
-		require('./plugins/scope-watches.js')
-	];
+    var ngBarPlugins = [
+        require('./plugins/angular-info.js'),
+        require('./plugins/memory-usage.js'),
+        require('./plugins/scopes-info.js'),
+        require('./plugins/angular-services.js')
+    ];
 
-	if (typeof window.angular === 'undefined') {
-		throw 'No Angular, No Toolbar';
-	}
+    if (typeof window.angular === 'undefined') {
+        throw 'No Angular, No Toolbar';
+    }
 
 
-	function NgBar() {}
-	NgBar.prototype.version = '1.0.0';
+    function NgBar() {}
+    NgBar.prototype.version = '1.0.0';
 
-	NgBar.prototype.init = function() {		
-		this._createContainer();
-		this._initPlugins();
-	};
-	/**
-	 * Create main container
-	 */
-	NgBar.prototype._createContainer = function() {
-		var body = document.getElementsByTagName('body')[0],
-			wrap = document.createElement('div');
+    NgBar.prototype.init = function() {     
+        this._createContainer();
+        this._initPlugins();
+    };
+    /**
+     * Create main container
+     */
+    NgBar.prototype._createContainer = function() {
+        var body = document.getElementsByTagName('body')[0],
+            wrap = document.createElement('div');
 
-		wrap.id = 'ng-bar-wrap';
-		body.appendChild(wrap);
+        wrap.id = 'ng-bar-wrap';
+        body.appendChild(wrap);
 
-		this._container = document.createElement('div');
-		this._container.id = 'ng-bar';
-		wrap.appendChild(this._container);
+        this._container = document.createElement('div');
+        this._container.id = 'ng-bar';
+        wrap.appendChild(this._container);
 
-		var logo = document.createElement('div');
-		logo.className = 'logo';
-		logo.innerHTML = '<h4><a href="http://yaraslav.com/ng-bar">ng-bar ' + this.version + '</a></h4>';
-		this._container.appendChild(logo);
+        var logo = document.createElement('div');
+        logo.className = 'logo';
+        logo.innerHTML = '<h4><a href="http://yaraslav.com/ng-bar">ng-bar ' + this.version + '</a></h4>';
+        this._container.appendChild(logo);
 
-		this._styles = document.createElement('style');
-		this._styles.innerHTML = cssString;
-		body.appendChild(this._styles);
-	};
-	/**
-	 * Init plugins & create containers for them
-	 * @return {[type]} [description]
-	 */
-	NgBar.prototype._initPlugins = function() {
-		var self = this;
-		this.plugins = [];
+        var _styles = document.createElement('style');
+        _styles.innerHTML = cssString;
+        body.appendChild(_styles);
+    };
+    /**
+     * Init plugins & create containers for them
+     * @return {[type]} [description]
+     */
+    NgBar.prototype._initPlugins = function() {
+        var self = this;
+        this.plugins = [];
 
-		angular.forEach(ngBarPlugins, function(plugin) {
-			var elm = document.createElement('div');
-			self._container.appendChild(elm);
-			plugin._elm = elm;
-			plugin.init(elm);
+        angular.forEach(ngBarPlugins, function(plugin) {
+            var elm = document.createElement('div');
+            elm.className = 'ng-bar-plugin';
+            self._container.appendChild(elm);
+            plugin._elm = elm;
+            plugin.init(elm);
 
-			self.plugins.push(plugin);
-		});
-	};
+            angular.element(elm).on('click', self.elmClickHandler);
 
-	window.NgBar = new NgBar();
-	window.NgBar.init();
+            self.plugins.push(plugin);
+        });
+    };
+    NgBar.prototype.elmClickHandler = function(e) {
+        var elm = angular.element(e.toElement);
+        // find parent 
+        while (elm && !elm.hasClass('ng-bar-plugin')) {
+            elm = elm.parent();
+        }
+
+        elm.toggleClass('active');
+    };
+
+    window.NgBar = new NgBar();
+    window.NgBar.init();
 })();

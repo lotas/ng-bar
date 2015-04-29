@@ -28,6 +28,8 @@
 	display: block;
 	float: left;
 	border-right: 1px solid #000;
+	position: relative;
+	cursor: pointer;
 }
 #ng-bar h4 {
 	margin: 8px 8px;
@@ -37,4 +39,46 @@
 #ng-bar .logo {
 	float: right;
 	color: ##627E96;
+}
+#ng-bar .ngbar-app-name {
+	margin-left: 8px;
+}
+
+#ng-bar .sub {
+	display: none;
+	position: absolute;
+	bottom: 32px;
+	left: 0;
+	margin-bottom: 2px;
+	border: 1px solid #ccc;
+	max-height: 300px;
+	min-height: 40px;
+	min-width: 180px;
+	overflow-y: auto;
+	background: #fff;
+	padding-right:20px;
+}
+#ng-bar .active {
+	background: #C9E7F4;
+}
+#ng-bar .active .sub {
+	display: block;
+}
+
+#ng-bar .ng-bar-plugin {
+	
+}
+#ng-bar .sub ul {
+	padding-left: 15px;
+}
+#ng-bar .sub li { 
+	list-style-type: none;
+	white-space: nowrap;
+}
+#ng-bar li.has-sub:hover:after {
+	content: '▶';
+	float: right;
+}
+#ng-bar .hidden {
+	display: none;
 }
