@@ -4,6 +4,11 @@ Build with:
 
 	npm run build
 
+# Use
+
+Use with: 
+
+	<script src="ng-bar.js"></script>
 
 
 # Libraries
