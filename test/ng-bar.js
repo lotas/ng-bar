@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js');
     
-    var cssString = "#ng-bar-wrap {\n\twidth: 100%;\n\tposition: fixed;\n\tbottom: 0px;\n\tz-index: 9999;\n\theight: 32px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n\tborder:1px solid #11163E;\n\tbackground-color: #D6F3FF;\n\n/*\twidth:100%;\n\theight: 24px;\n\tposition:fixed;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tpadding:0 40px 10px 0;\n\tfont-family: Verdana;*/\n}\n#ng-bar {\n\tmargin-bottom: 28px;\n}\n\n#ng-bar>div {\n\tpadding: 2px 10px;\n\tfont-size: 12px;\n\tdisplay: block;\n\tfloat: left;\n\tborder-right: 1px solid #000;\n\tposition: relative;\n\tcursor: pointer;\n}\n#ng-bar h4 {\n\tmargin: 8px 8px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n}\n#ng-bar .logo {\n\tfloat: right;\n\tcolor: ##627E96;\n}\n#ng-bar .ngbar-app-name {\n\tmargin-left: 8px;\n}\n\n#ng-bar .sub {\n\tdisplay: none;\n\tposition: absolute;\n\tbottom: 32px;\n\tleft: 0;\n\tmargin-bottom: 2px;\n\tborder: 1px solid #ccc;\n\tmax-height: 300px;\n\tmin-height: 40px;\n\tmin-width: 180px;\n\toverflow-y: auto;\n\tbackground: #fff;\n\tpadding-right:20px;\n}\n#ng-bar .active {\n\tbackground: #C9E7F4;\n}\n#ng-bar .active .sub {\n\tdisplay: block;\n}\n\n#ng-bar .ng-bar-plugin {\n\t\n}\n#ng-bar .sub ul {\n\tpadding-left: 15px;\n}\n#ng-bar .sub li { \n\tlist-style-type: none;\n\twhite-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n\tcontent: '▶';\n\tfloat: right;\n}\n#ng-bar .hidden {\n\tdisplay: none;\n}\n";
+    var cssString = "#ng-bar-wrap {\n\twidth: 100%;\n\tposition: fixed;\n\tbottom: 0px;\n\tz-index: 9999;\n\theight: 32px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n\tborder:1px solid #11163E;\n\tbackground-color: #D6F3FF;\n\n/*\twidth:100%;\n\theight: 24px;\n\tposition:fixed;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tpadding:0 40px 10px 0;\n\tfont-family: Verdana;*/\n}\n#ng-bar {\n\tmargin-bottom: 28px;\n}\n\n#ng-bar>div {\n\tpadding: 2px 10px;\n\tfont-size: 12px;\n\tdisplay: block;\n\tfloat: left;\n\tborder-right: 1px solid #000;\n\tposition: relative;\n\tcursor: pointer;\n}\n#ng-bar h4 {\n\tmargin: 8px 8px;\n\tfont-family: Verdana;\n\tfont-size: 12px;\n}\n#ng-bar .logo {\n\tfloat: right;\n\tcolor: ##627E96;\n}\n#ng-bar .ngbar-app-name {\n\tmargin-left: 8px;\n}\n\n#ng-bar .sub {\n\tdisplay: none;\n\tposition: absolute;\n\tbottom: 32px;\n\tleft: 0;\n\tmargin-bottom: 2px;\n\tborder: 1px solid #ccc;\n\tmax-height: 300px;\n\tmin-height: 40px;\n\tmin-width: 180px;\n\toverflow-y: auto;\n\tbackground: #fff;\n\tpadding-right:20px;\n}\n#ng-bar .active {\n\tbackground: #C9E7F4;\n}\n#ng-bar .active .sub {\n\tdisplay: block;\n}\n\n#ng-bar .ng-bar-plugin {\n\t\n}\n#ng-bar .sub ul {\n\tpadding-left: 15px;\n}\n#ng-bar .sub li { \n\tlist-style-type: none;\n\twhite-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n\tcontent: '▶';\n\tfloat: right;\n}\n#ng-bar .hidden {\n\tdisplay: none;\n}\n#ng-bar .cnt {\n\tfont-weight: bold;\n\tpaddin-left: 10px;\n\tcolor: #302F31;\n}";
 
     // var _ = require('lodash');
 
@@ -10,7 +10,8 @@
         require('./plugins/angular-info.js'),
         require('./plugins/memory-usage.js'),
         require('./plugins/scopes-info.js'),
-        require('./plugins/angular-services.js')
+        require('./plugins/angular-services.js'),
+        require('./plugins/forms.js')
     ];
 
     if (typeof window.angular === 'undefined') {
@@ -81,7 +82,7 @@
     window.NgBar = new NgBar();
     window.NgBar.init();
 })();
-},{"./plugins/angular-info.js":2,"./plugins/angular-services.js":3,"./plugins/memory-usage.js":4,"./plugins/scopes-info.js":5,"./utils.js":6}],2:[function(require,module,exports){
+},{"./plugins/angular-info.js":2,"./plugins/angular-services.js":3,"./plugins/forms.js":4,"./plugins/memory-usage.js":5,"./plugins/scopes-info.js":6,"./utils.js":7}],2:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 var AngularInfoPlugin = {
@@ -89,21 +90,35 @@ var AngularInfoPlugin = {
 };
 
 function initPlugin(elm) {	
-	elm.innerHTML = '<h4 title="'+angular.version.codeName+'">' + angular.version.full + '</h4>';
+	elm.innerHTML = '<h4 title="'+angular.version.codeName+'">' + angular.version.full + '</h4><div class="sub" id="ngbar-app-deps"></div>';
 
 	setTimeout(function(){
 		var mainModule = utils.guessMainModule();
+		var deps = buildDeps(mainModule);
 
 		elm.innerHTML = '<h4 title="'+angular.version.codeName+'">ng ' + angular.version.full + 
-			 ' <span class="ngbar-app-name">App: <strong>' + mainModule + '</strong></h4>';
+			 ' <span class="ngbar-app-name">App: <strong>' + mainModule + '</strong></h4><div class="sub" id="ngbar-app-deps">' + deps + '</div>';
 	}, 500);
+}
+
+function buildDeps(mod) {
+	var html = '<li><b>Requires:</b></li>';
+
+	angular.forEach(angular.module(mod).requires, function(elm) {
+		// those hacks probably wouldn't be appreciated much
+		var servicesCount = angular.module(elm)._invokeQueue.length;
+		
+		html += '<li>' + elm + ' <span class="cnt">' + servicesCount + '</span></li>';
+	});
+
+	return '<ul>' + html + '</ul>';
 }
 
 if (typeof module !== "undefined" && module.exports) {
 	module.exports = AngularInfoPlugin;
 }
 
-},{"../utils.js":6}],3:[function(require,module,exports){
+},{"../utils.js":7}],3:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 var AngularServicesPlugin = {
@@ -181,7 +196,31 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = AngularServicesPlugin;
 }
 
-},{"../utils.js":6}],4:[function(require,module,exports){
+},{"../utils.js":7}],4:[function(require,module,exports){
+var utils = require('../utils.js')();
+
+var FormsPlugin = {
+    init: initPlugin
+};
+
+/**
+ * 
+ */
+function initPlugin(elm) {
+    elm.innerHTML = '<h4>Forms: <span id="ngbar-forms">...</span></h4>';
+
+    setTimeout(function(){
+        
+
+    }, 1000);
+}
+
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = FormsPlugin;
+}
+
+},{"../utils.js":7}],5:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 var MemoryUsagePlugin = {
@@ -208,7 +247,7 @@ if (typeof module !== "undefined" && module.exports) {
 	module.exports = MemoryUsagePlugin;
 }
 
-},{"../utils.js":6}],5:[function(require,module,exports){
+},{"../utils.js":7}],6:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 var ScopesInfoPlugin = {
@@ -230,7 +269,7 @@ if (typeof module !== "undefined" && module.exports) {
 	module.exports = ScopesInfoPlugin;
 }
 
-},{"../utils.js":6}],6:[function(require,module,exports){
+},{"../utils.js":7}],7:[function(require,module,exports){
 var NgBarUtils = function() {
   var angular = window.angular;
 

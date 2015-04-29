@@ -82,3 +82,8 @@
 #ng-bar .hidden {
 	display: none;
 }
+#ng-bar .cnt {
+	font-weight: bold;
+	paddin-left: 10px;
+	color: #302F31;
+}

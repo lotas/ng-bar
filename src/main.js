@@ -9,7 +9,8 @@
         require('./plugins/angular-info.js'),
         require('./plugins/memory-usage.js'),
         require('./plugins/scopes-info.js'),
-        require('./plugins/angular-services.js')
+        require('./plugins/angular-services.js'),
+        require('./plugins/forms.js')
     ];
 
     if (typeof window.angular === 'undefined') {
