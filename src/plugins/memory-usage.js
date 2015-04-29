@@ -1,8 +1,5 @@
 var utils = require('../utils.js')();
 
-var MemoryUsagePlugin = {
-	init: initPlugin
-};
 
 /**
  * Chrome only
@@ -21,5 +18,5 @@ function initPlugin(elm) {
 
 
 if (typeof module !== "undefined" && module.exports) {
-	module.exports = MemoryUsagePlugin;
+	module.exports = initPlugin;
 }

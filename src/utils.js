@@ -70,6 +70,13 @@ var NgBarUtils = function() {
       } catch (e) {
         return [];
       }
+    },
+
+    hasParentWithClass: function(elm, className) {
+        while (elm && !elm.hasClass(className) && elm[0] && elm[0].tagName !== 'body') {
+            elm = elm.parent();
+        }
+        return elm.hasClass(className);
     }
   };
 

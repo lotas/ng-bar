@@ -1,5 +1,5 @@
 (function(){
-    var utils = require('./utils.js');
+    var utils = require('./utils.js')();
     var fs = require('fs');
     var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
 
@@ -41,7 +41,7 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4><a href="http://yaraslav.com/ng-bar">ng-bar ' + this.version + '</a></h4>';
+        logo.innerHTML = '<h4><a href="https://github.com/lotas/ng-bar">ng-bar ' + this.version + '</a></h4>';
         this._container.appendChild(logo);
 
         var _styles = document.createElement('style');
@@ -61,7 +61,7 @@
             elm.className = 'ng-bar-plugin';
             self._container.appendChild(elm);
             plugin._elm = elm;
-            plugin.init(elm);
+            plugin(elm);
 
             angular.element(elm).on('click', self.elmClickHandler);
 
@@ -70,6 +70,11 @@
     };
     NgBar.prototype.elmClickHandler = function(e) {
         var elm = angular.element(e.toElement);
+
+        if (utils.hasParentWithClass(elm, 'sub')) {
+            return false;
+        }
+
         // find parent 
         while (elm && !elm.hasClass('ng-bar-plugin')) {
             elm = elm.parent();

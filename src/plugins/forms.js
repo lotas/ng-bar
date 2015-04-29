@@ -1,8 +1,5 @@
 var utils = require('../utils.js')();
 
-var FormsPlugin = {
-    init: initPlugin
-};
 
 /**
  * 
@@ -18,5 +15,5 @@ function initPlugin(elm) {
 
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = FormsPlugin;
+    module.exports = initPlugin;
 }

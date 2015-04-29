@@ -1,9 +1,5 @@
 var utils = require('../utils.js')();
 
-var AngularServicesPlugin = {
-    init: initPlugin
-};
-
 /**
  * 
  */
@@ -43,11 +39,13 @@ function initPlugin(elm) {
             if (serviceName && services[serviceName]) {
                 document.getElementById('ngbar-services-details').innerHTML = buildServiceDetails(services[serviceName]);
                 subElm.style.display = '';
-            }
 
-            // adjust second sub position
-            subElm.style.marginLeft = list.offsetWidth + 'px';
-            subElm.style.height = list.offsetHeight + 'px';
+                // adjust second sub position
+                subElm.style.marginLeft = list.offsetWidth + 'px';
+                subElm.style.height = list.offsetHeight + 'px';
+            } else {
+                subElm.style.display = 'none';
+            }
 
             e.stopImmediatePropagation();
             return false;
@@ -56,6 +54,7 @@ function initPlugin(elm) {
 
     }, 1000);
 }
+
 
 function buildServiceDetails(service) {
     var callables = '';
@@ -72,5 +71,5 @@ function buildServiceDetails(service) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-    module.exports = AngularServicesPlugin;
+    module.exports = initPlugin;
 }

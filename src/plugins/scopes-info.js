@@ -1,8 +1,5 @@
 var utils = require('../utils.js')();
 
-var ScopesInfoPlugin = {
-	init: initPlugin
-};
 
 function initPlugin(elm) {
 	elm.innerHTML = '<h4>Scopes: <span id="ngbar-scopes">...</span> | Watchers: <span id="ngbar-watchers">..</span></h4>';
@@ -16,5 +13,5 @@ function initPlugin(elm) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-	module.exports = ScopesInfoPlugin;
+	module.exports = initPlugin;
 }
