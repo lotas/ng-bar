@@ -23,7 +23,8 @@ var NgBarUtils = function() {
   return {
 
     guessMainModule: function() {
-      return document.querySelector('[ng-app]').attributes['ng-app'].value;
+      var app = document.querySelector('[ng-app]').attributes['ng-app'].value;
+      return app ? app : 'ng';
     },
     
     /**
