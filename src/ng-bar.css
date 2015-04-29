@@ -1,14 +1,25 @@
-#ng-bar {
-	width:100%;
+#ng-bar-wrap {
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	z-index: 9999;
+	height: 32px;
+	font-family: Verdana;
+	font-size: 12px;
+	border:1px solid #11163E;
+	background-color: #D6F3FF;
+
+/*	width:100%;
 	height: 24px;
 	position:fixed;
 	left:0;
 	right:0;
 	bottom:0;
 	padding:0 40px 10px 0;
-	border:1px solid #11163E;
-	background-color: #D6F3FF;
-	font-family: Verdana;
+	font-family: Verdana;*/
+}
+#ng-bar {
+	margin-bottom: 28px;
 }
 
 #ng-bar>div {
@@ -20,6 +31,8 @@
 }
 #ng-bar h4 {
 	margin: 8px 8px;
+	font-family: Verdana;
+	font-size: 12px;
 }
 #ng-bar .logo {
 	float: right;

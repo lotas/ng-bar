@@ -28,11 +28,15 @@
 	 * Create main container
 	 */
 	NgBar.prototype._createContainer = function() {
-		var body = document.getElementsByTagName('body')[0];
+		var body = document.getElementsByTagName('body')[0],
+			wrap = document.createElement('div');
+
+		wrap.id = 'ng-bar-wrap';
+		body.appendChild(wrap);
 
 		this._container = document.createElement('div');
 		this._container.id = 'ng-bar';
-		body.appendChild(this._container);
+		wrap.appendChild(this._container);
 
 		var logo = document.createElement('div');
 		logo.className = 'logo';
