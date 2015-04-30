@@ -48,13 +48,10 @@ MIT
 
 ## Author
 
-Yaraslau Kurmyza <me@yaraslav.com>
+Yaraslau Kurmyza <yaraslau.kurmyza@crosslend.com>
 
 
 ### Why
 
-Yeah yeah.. Batarang, chrome dev tools, bla-bla bla
-
-I just want to see some numbers. I like numbers. 
-And I want to know when something is not working, and make sure that something is included properly
-
+Despite the fact that we have an awesome Batarang Angular.js chrome extension, we still need more information during development.
+We need to see memory information, scopes information and various additional info, that is not directly accessible in other tools

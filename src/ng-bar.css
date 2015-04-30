@@ -126,3 +126,7 @@
   background: #ff0000;
   color: #ffffff;
 }
+#ng-bar .enable-debug {
+  line-height: 28px;
+  color: red;
+}

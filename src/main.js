@@ -20,7 +20,7 @@
 
 
     function NgBar() {}
-    NgBar.prototype.version = '1.0.7';
+    NgBar.prototype.version = '1.0.8';
 
     NgBar.prototype.init = function() {     
         this._createContainer();
@@ -55,7 +55,7 @@
         if (isHidden) {
             angular.element(wrap).addClass('hidden');
         }
-        angular.element(onoff).on('click', function(){
+        onoff.addEventListener('click', function(){
             isHidden = !isHidden;
             onoff.innerHTML = isHidden ? '&rarr;' : '&larr;';
             angular.element(wrap).toggleClass('hidden');
@@ -65,6 +65,19 @@
         var _styles = document.createElement('style');
         _styles.innerHTML = cssString;
         body.appendChild(_styles);
+
+        // Detect if debug info was disabled
+        if (angular.isUndefined(angular.element(document).scope())) {
+            console.info('Looks like your angular app was compiled without compile info.' + 
+                "\n\nThis is defenitely good for an end user!\nBut a little bit not helpfull for developers and for this debug toolbar.\nSee https://docs.angularjs.org/guide/production#disabling-debug-data\n" +
+                "You can just click on a red link saying 'Reload with debug'\nOr do it yourself here, by running angular.reloadWithDebugInfo()\n");
+
+            var enableDebug = document.createElement('a');
+            enableDebug.className = 'enable-debug';
+            enableDebug.innerHTML = 'reloadWithDebugInfo()';
+            enableDebug.addEventListener('click', angular.reloadWithDebugInfo);
+            this._container.appendChild(enableDebug);
+        }
     };
     /**
      * Init plugins & create containers for them
@@ -100,7 +113,19 @@
 
         elm.toggleClass('active');
     };
+    
+    
 
-    window.NgBar = new NgBar();
-    window.NgBar.init();
+    if (document.loaded) {
+        runNgBar();
+    } else if (window.addEventListener) {  
+        window.addEventListener('load', runNgBar, false);
+    } else {
+        window.attachEvent('onload', runNgBar);
+    }
+
+    function runNgBar() {
+        window.NgBar = new NgBar();
+        window.NgBar.init();
+    }
 })();

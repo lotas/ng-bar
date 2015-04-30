@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js')();
     
-    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-x: auto;\n  overflow-y: auto;\n  background: #fff !important;\n  color: #111111 !important;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar li h5 {\n  background: #eee;\n  margin:2px 0;\n  padding: 4px 0;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}\n\n#ng-bar .errors {\n  background: #ff0000;\n  color: #ffffff;\n}\n";
+    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-x: auto;\n  overflow-y: auto;\n  background: #fff !important;\n  color: #111111 !important;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar li h5 {\n  background: #eee;\n  margin:2px 0;\n  padding: 4px 0;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}\n\n#ng-bar .errors {\n  background: #ff0000;\n  color: #ffffff;\n}\n#ng-bar .enable-debug {\n  line-height: 28px;\n  color: red;\n}";
 
     // var _ = require('lodash');
 
@@ -56,7 +56,7 @@
         if (isHidden) {
             angular.element(wrap).addClass('hidden');
         }
-        angular.element(onoff).on('click', function(){
+        onoff.addEventListener('click', function(){
             isHidden = !isHidden;
             onoff.innerHTML = isHidden ? '&rarr;' : '&larr;';
             angular.element(wrap).toggleClass('hidden');
@@ -66,6 +66,19 @@
         var _styles = document.createElement('style');
         _styles.innerHTML = cssString;
         body.appendChild(_styles);
+
+        // Detect if debug info was disabled
+        if (angular.isUndefined(angular.element(document).scope())) {
+            console.info('Looks like your angular app was compiled without compile info.' + 
+                "\n\nThis is defenitely good for an end user!\nBut a little bit not helpfull for developers and for this debug toolbar.\nSee https://docs.angularjs.org/guide/production#disabling-debug-data\n" +
+                "You can just click on a red link saying 'Reload with debug'\nOr do it yourself here, by running angular.reloadWithDebugInfo()\n");
+
+            var enableDebug = document.createElement('a');
+            enableDebug.className = 'enable-debug';
+            enableDebug.innerHTML = 'reloadWithDebugInfo()';
+            enableDebug.addEventListener('click', angular.reloadWithDebugInfo);
+            this._container.appendChild(enableDebug);
+        }
     };
     /**
      * Init plugins & create containers for them
@@ -101,9 +114,21 @@
 
         elm.toggleClass('active');
     };
+    
+    
 
-    window.NgBar = new NgBar();
-    window.NgBar.init();
+    if (document.loaded) {
+        runNgBar();
+    } else if (window.addEventListener) {  
+        window.addEventListener('load', runNgBar, false);
+    } else {
+        window.attachEvent('onload', runNgBar);
+    }
+
+    function runNgBar() {
+        window.NgBar = new NgBar();
+        window.NgBar.init();
+    }
 })();
 },{"./plugins/angular-info.js":2,"./plugins/angular-services.js":3,"./plugins/forms.js":4,"./plugins/memory-usage.js":5,"./plugins/routes.js":6,"./plugins/scopes-info.js":7,"./utils.js":8}],2:[function(require,module,exports){
 var utils = require('../utils.js')();

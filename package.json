@@ -1,20 +1,27 @@
 {
   "name": "ng-bar",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Angular Debug Toolbar",
   "main": "ng-bar.js",
+  "respository": {
+    "type": "git",
+    "url": "git://github.com/lots/ng-bar.git"
+  },
   "scripts": {
     "dist": "browserify src/main.js -o ng-bar.js",
     "lint": "jshint src/*.js",
+    "build:css": "",
     "build:js": "browserify -t brfs src/main.js > ng-bar.js",
     "build": "npm run prebuild:js && npm run build:js && cp ng-bar.js test/",
     "prebuild:js": "npm run lint"
   },
-  "author": "Yaraslau Kurmyza <lotask@gmail.com>",
+  "author": "Yaraslau Kurmyza <me@yaraslav.com>",
   "license": "MIT",
   "devDependencies": {
     "brfs": "^1.4.0",
+    "browserify": "^10.0.0",
     "jshint": "^2.7.0",
+    "less": "^2.5.0",
     "lodash": "^3.7.0"
   }
 }
