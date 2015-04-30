@@ -54,8 +54,9 @@
   font-size: 14px;
   font-weight: bold;
   background: #EEE;
-  border: 1px solid #ccc;
-  border-radius: 0 4px 4px 0;
+  border: 1px solid #11163E;
+  border-left: none;
+  // border-radius: 0 4px 4px 0;
 }
 #ng-bar-onoff:hover {
   background: #EFEEEF;
