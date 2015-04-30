@@ -1,0 +1,77 @@
+.ng-bar-plugin {
+
+  // widget title
+  h4 {
+    margin: 8px;
+    font-family: Verdana;
+    font-size: 12px;
+
+    // count information
+    span {
+      font-weight: bolder;
+    }
+  }
+
+  // hidden sub-item shown on click
+  .sub {
+    display: none;
+    position: absolute;
+    bottom: 32px;
+    left: 0;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    max-height: 300px;
+    min-height: 40px;
+    min-width: 180px;
+    overflow-x: auto;
+    overflow-y: auto;
+    background: #fff !important;
+    color: #111111 !important;
+    padding: 4px 20px 4px 10px;
+
+    ul {
+      padding-left: 10px;
+    }
+    li { 
+      list-style-type: none;
+      white-space: nowrap;
+
+      // group title
+      h5 {
+        background: @list-group-title-background;
+        margin: 2px 0 2px -10px;
+        padding: 4px 0 4px 10px;
+      }
+    }
+    li.has-sub:hover:after {
+      content: '▶';
+      float: right;
+    }
+
+  }
+
+  // count in list
+  .cnt {
+    font-weight: bold;
+    paddin-left: 10px;
+    color: @count-info-color;
+  }
+
+  &.active {
+    background: @plugin-background-active;
+
+    .sub {
+      display: block;
+    }
+  }
+
+  table {
+    margin: 4px 10px 4px 10px;
+
+    .nw td,
+    .nw th {
+      white-space: nowrap;
+    }
+  }
+  
+}

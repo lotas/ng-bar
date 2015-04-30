@@ -6,40 +6,11 @@
   height: 32px;
   font-family: Verdana;
   font-size: 12px;
-  border:1px solid #11163E;
-  background-color: #FFF;
-
-/*  width:100%;
-  height: 24px;
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:0 40px 10px 0;
-  font-family: Verdana;*/
+  border: 1px solid #11163e;
+  background-color: #ffffff;
 }
-#ng-bar {
-  margin-left: 24px;
-  margin-bottom: 28px;
-}
-
-#ng-bar>div {
-  padding: 2px 10px;
-  font-size: 12px;
-  display: block;
-  float: left;
-  border-right: 1px solid #000;
-  position: relative;
-  cursor: pointer;
-}
-#ng-bar h4 {
-  margin: 8px 8px;
-  font-family: Verdana;
-  font-size: 12px;
-}
-#ng-bar .logo {
-  float: right;
-  color: ##627E96;
+#ng-bar-wrap.hidden {
+  display: none;
 }
 #ng-bar-onoff {
   width: 28px;
@@ -48,24 +19,62 @@
   left: 0px;
   z-index: 9999;
   height: 32px;
-
   padding: 4px;
   line-height: 24px;
   font-size: 14px;
   font-weight: bold;
-  background: #EEE;
-  border: 1px solid #11163E;
+  background: #eeeeee;
+  border: 1px solid #11163e;
   border-left: none;
-  // border-radius: 0 4px 4px 0;
+  cursor: pointer;
 }
 #ng-bar-onoff:hover {
   background: #EFEEEF;
 }
+#ng-bar {
+  margin-left: 24px;
+  margin-bottom: 28px;
+}
+#ng-bar > div {
+  padding: 2px 10px;
+  font-size: 12px;
+  display: block;
+  float: left;
+  border-right: 1px solid #000;
+  position: relative;
+  cursor: pointer;
+}
+#ng-bar .hidden {
+  display: none;
+}
+#ng-bar .errors {
+  background: #ff0000;
+  color: #ffffff;
+}
+#ng-bar .enable-debug {
+  line-height: 28px;
+  color: #ffffff;
+  background: #ff0000;
+  padding: auto 8px;
+}
+#ng-bar .logo {
+  float: right;
+  color: ##627E96;
+  font-size: 12px;
+  line-height: 24px;
+}
 #ng-bar .ngbar-app-name {
   margin-left: 8px;
 }
-
-#ng-bar .sub {
+.ng-bar-plugin h4 {
+  margin: 8px;
+  font-family: Verdana;
+  font-size: 12px;
+}
+.ng-bar-plugin h4 span {
+  font-weight: bolder;
+}
+.ng-bar-plugin .sub {
   display: none;
   position: absolute;
   bottom: 32px;
@@ -81,52 +90,37 @@
   color: #111111 !important;
   padding: 4px 20px 4px 10px;
 }
-#ng-bar .active {
-  background: #C9E7F4;
+.ng-bar-plugin .sub ul {
+  padding-left: 10px;
 }
-#ng-bar .active .sub {
-  display: block;
-}
-
-#ng-bar .ng-bar-plugin {
-  
-}
-#ng-bar .sub ul {
-  padding-left: 15px;
-}
-#ng-bar .sub li { 
+.ng-bar-plugin .sub li {
   list-style-type: none;
   white-space: nowrap;
 }
-#ng-bar li.has-sub:hover:after {
+.ng-bar-plugin .sub li h5 {
+  background: #eeeeee;
+  margin: 2px 0 2px -10px;
+  padding: 4px 0 4px 10px;
+}
+.ng-bar-plugin .sub li.has-sub:hover:after {
   content: '▶';
   float: right;
 }
-#ng-bar li h5 {
-  background: #eee;
-  margin:2px 0;
-  padding: 4px 0;
-}
-#ng-bar .hidden, #ng-bar-wrap.hidden {
-  display: none;
-}
-#ng-bar .cnt {
+.ng-bar-plugin .cnt {
   font-weight: bold;
   paddin-left: 10px;
-  color: #302F31;
+  color: #333333;
 }
-#ng-bar table  {
+.ng-bar-plugin.active {
+  background: #c9e7f4;
+}
+.ng-bar-plugin.active .sub {
+  display: block;
+}
+.ng-bar-plugin table {
   margin: 4px 10px 4px 10px;
 }
-#ng-bar .nw td, #ng-bar .nw th {
+.ng-bar-plugin table .nw td,
+.ng-bar-plugin table .nw th {
   white-space: nowrap;
-}
-
-#ng-bar .errors {
-  background: #ff0000;
-  color: #ffffff;
-}
-#ng-bar .enable-debug {
-  line-height: 28px;
-  color: red;
 }

@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js')();
     
-    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-x: auto;\n  overflow-y: auto;\n  background: #fff !important;\n  color: #111111 !important;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar li h5 {\n  background: #eee;\n  margin:2px 0;\n  padding: 4px 0;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}\n\n#ng-bar .errors {\n  background: #ff0000;\n  color: #ffffff;\n}\n#ng-bar .enable-debug {\n  line-height: 28px;\n  color: red;\n}";
+    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border: 1px solid #11163e;\n  background-color: #ffffff;\n}\n#ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #eeeeee;\n  border: 1px solid #11163e;\n  border-left: none;\n  cursor: pointer;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n#ng-bar > div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar .hidden {\n  display: none;\n}\n#ng-bar .errors {\n  background: #ff0000;\n  color: #ffffff;\n}\n#ng-bar .enable-debug {\n  line-height: 28px;\n  color: #ffffff;\n  background: #ff0000;\n  padding: auto 8px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n  font-size: 12px;\n  line-height: 24px;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n.ng-bar-plugin h4 {\n  margin: 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n.ng-bar-plugin h4 span {\n  font-weight: bolder;\n}\n.ng-bar-plugin .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-x: auto;\n  overflow-y: auto;\n  background: #fff !important;\n  color: #111111 !important;\n  padding: 4px 20px 4px 10px;\n}\n.ng-bar-plugin .sub ul {\n  padding-left: 10px;\n}\n.ng-bar-plugin .sub li {\n  list-style-type: none;\n  white-space: nowrap;\n}\n.ng-bar-plugin .sub li h5 {\n  background: #eeeeee;\n  margin: 2px 0 2px -10px;\n  padding: 4px 0 4px 10px;\n}\n.ng-bar-plugin .sub li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n.ng-bar-plugin .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #333333;\n}\n.ng-bar-plugin.active {\n  background: #c9e7f4;\n}\n.ng-bar-plugin.active .sub {\n  display: block;\n}\n.ng-bar-plugin table {\n  margin: 4px 10px 4px 10px;\n}\n.ng-bar-plugin table .nw td,\n.ng-bar-plugin table .nw th {\n  white-space: nowrap;\n}\n";
 
     // var _ = require('lodash');
 
@@ -21,7 +21,7 @@
 
 
     function NgBar() {}
-    NgBar.prototype.version = '1.0.7';
+    NgBar.prototype.version = '1.0.8';
 
     NgBar.prototype.init = function() {     
         this._createContainer();
@@ -38,13 +38,17 @@
         wrap.id = 'ng-bar-wrap';
         body.appendChild(wrap);
 
+        var _styles = document.createElement('style');
+        _styles.innerHTML = cssString;
+        body.appendChild(_styles);
+
         this._container = document.createElement('div');
         this._container.id = 'ng-bar';
         wrap.appendChild(this._container);
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a></h4>';
+        logo.innerHTML = 'v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a>';
         this._container.appendChild(logo);
 
         var isHidden = localStorage.getItem('ng-bar.is') === '1';
@@ -62,10 +66,6 @@
             angular.element(wrap).toggleClass('hidden');
             localStorage.setItem('ng-bar.is', isHidden ? '1' : '0');
         });
-
-        var _styles = document.createElement('style');
-        _styles.innerHTML = cssString;
-        body.appendChild(_styles);
 
         // Detect if debug info was disabled
         if (angular.isUndefined(angular.element(document).scope())) {

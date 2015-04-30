@@ -37,13 +37,17 @@
         wrap.id = 'ng-bar-wrap';
         body.appendChild(wrap);
 
+        var _styles = document.createElement('style');
+        _styles.innerHTML = cssString;
+        body.appendChild(_styles);
+
         this._container = document.createElement('div');
         this._container.id = 'ng-bar';
         wrap.appendChild(this._container);
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a></h4>';
+        logo.innerHTML = 'v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a>';
         this._container.appendChild(logo);
 
         var isHidden = localStorage.getItem('ng-bar.is') === '1';
@@ -61,10 +65,6 @@
             angular.element(wrap).toggleClass('hidden');
             localStorage.setItem('ng-bar.is', isHidden ? '1' : '0');
         });
-
-        var _styles = document.createElement('style');
-        _styles.innerHTML = cssString;
-        body.appendChild(_styles);
 
         // Detect if debug info was disabled
         if (angular.isUndefined(angular.element(document).scope())) {

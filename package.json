@@ -10,9 +10,9 @@
   "scripts": {
     "dist": "browserify src/main.js -o ng-bar.js",
     "lint": "jshint src/*.js",
-    "build:css": "",
+    "build:css": "./node_modules/less/bin/lessc src/styles/main.less > src/ng-bar.css",
     "build:js": "browserify -t brfs src/main.js > ng-bar.js",
-    "build": "npm run prebuild:js && npm run build:js && cp ng-bar.js test/",
+    "build": "npm run prebuild:js && npm run build:css && npm run build:js && cp ng-bar.js test/",
     "prebuild:js": "npm run lint"
   },
   "author": "Yaraslau Kurmyza <me@yaraslav.com>",

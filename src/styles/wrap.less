@@ -1,0 +1,40 @@
+#ng-bar-wrap {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  z-index: 9999;
+  height: @bar-height;
+  font-family: Verdana;
+  font-size: 12px;
+  border:1px solid @bar-border-color;
+  background-color: @bar-wrap-background-color;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+#ng-bar-onoff {
+  width: 28px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 9999;
+  height: @bar-height;
+
+  padding: 4px;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  background: @switch-background;
+  border: 1px solid @bar-border-color;
+  border-left: none;
+  // border-radius: 0 4px 4px 0;
+  
+  cursor: pointer;
+
+  &:hover {
+    background: #EFEEEF;
+  } 
+  
+}
