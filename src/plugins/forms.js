@@ -47,12 +47,14 @@ function getFieldsInfo(forms) {
 	var html = '';
 	
 	angular.forEach(forms, function(form) {
-		var ngForm = angular.element(form).scope()[form.name];
+		var name = form.name || form.attributes['name'].value,
+			ngForm = angular.element(form).scope()[name];
+
 		if (!ngForm) {
 			return false;
 		}
 
-		html += '<li><h5>' + form.name + '</li></h5>';
+		html += '<li><h5>' + name + '</li></h5>';
 
 		// enumerate fields
 		angular.forEach(ngForm, function(obj, name) {

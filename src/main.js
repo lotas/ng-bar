@@ -43,16 +43,23 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
+        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a></h4>';
         this._container.appendChild(logo);
+
+        var isHidden = localStorage.getItem('ng-bar.is') === '1';
 
         var onoff = document.createElement('div');
         onoff.id = 'ng-bar-onoff';
-        onoff.innerHTML = '&lt;';
+        onoff.innerHTML = isHidden ? '&rarr;' : '&larr;';
         body.appendChild(onoff);
+        if (isHidden) {
+            angular.element(wrap).addClass('hidden');
+        }
         angular.element(onoff).on('click', function(){
-            onoff.innerHTML = onoff.innerHTML === '&lt;' ? '&gt;' : '&lt;';
+            isHidden = !isHidden;
+            onoff.innerHTML = isHidden ? '&rarr;' : '&larr;';
             angular.element(wrap).toggleClass('hidden');
+            localStorage.setItem('ng-bar.is', isHidden ? '1' : '0');
         });
 
         var _styles = document.createElement('style');
