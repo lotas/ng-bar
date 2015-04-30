@@ -10,7 +10,8 @@ Just though it would be nice to have such tool that would show some usefull info
 * Angular version
 * Angular modules
 * Angular services
-* Angular forms 
+* Angular forms (TODO)
+* ui-router routes list (TODO ngRoute)
 * active http requests
 * errors happening
 * included templates ($tempalteCache fun)

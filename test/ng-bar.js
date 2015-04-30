@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js')();
     
-    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-y: auto;\n  background: #fff;\n  padding-right:20px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}";
+    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-y: auto;\n  background: #fff;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}";
 
     // var _ = require('lodash');
 
@@ -11,6 +11,7 @@
         require('./plugins/memory-usage.js'),
         require('./plugins/scopes-info.js'),
         require('./plugins/angular-services.js'),
+        require('./plugins/routes.js'),
         require('./plugins/forms.js')
     ];
 
@@ -97,7 +98,7 @@
     window.NgBar = new NgBar();
     window.NgBar.init();
 })();
-},{"./plugins/angular-info.js":2,"./plugins/angular-services.js":3,"./plugins/forms.js":4,"./plugins/memory-usage.js":5,"./plugins/scopes-info.js":6,"./utils.js":7}],2:[function(require,module,exports){
+},{"./plugins/angular-info.js":2,"./plugins/angular-services.js":3,"./plugins/forms.js":4,"./plugins/memory-usage.js":5,"./plugins/routes.js":6,"./plugins/scopes-info.js":7,"./utils.js":8}],2:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 
@@ -163,7 +164,7 @@ if (typeof module !== "undefined" && module.exports) {
 	module.exports = initPlugin;
 }
 
-},{"../utils.js":7}],3:[function(require,module,exports){
+},{"../utils.js":8}],3:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 /**
@@ -240,7 +241,7 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = initPlugin;
 }
 
-},{"../utils.js":7}],4:[function(require,module,exports){
+},{"../utils.js":8}],4:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 
@@ -262,7 +263,7 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = initPlugin;
 }
 
-},{"../utils.js":7}],5:[function(require,module,exports){
+},{"../utils.js":8}],5:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 
@@ -286,7 +287,84 @@ if (typeof module !== "undefined" && module.exports) {
 	module.exports = initPlugin;
 }
 
-},{"../utils.js":7}],6:[function(require,module,exports){
+},{"../utils.js":8}],6:[function(require,module,exports){
+var utils = require('../utils.js')();
+
+/**
+ *  Routes debug 
+ */
+function initPlugin(elm) {
+    elm.innerHTML = '<h4>Routes: <span id="ngbar-router">...</span></h4><div class="sub" id="ngbar-router-routes"></div>';
+
+    setTimeout(function(){
+
+        var routerInfo = document.getElementById('ngbar-router'),
+            routesList = document.getElementById('ngbar-router-routes');
+
+        // detect routing: angular or ui-router
+        var router = detectRouter();
+        routerInfo.innerHTML = router;
+
+        if (router === 'ui') {
+            var routes = enumerateUiRoutes();
+            routerInfo.innerHTML += ' (' + routes[1].length + ')';
+            routesList.innerHTML = '<h5>ui-router routes</h5><table>' + routes[0] + '</table>';         
+        } else {
+            routesList.innerHTML = 'TODO '+ router;
+        }
+        
+    }, 1000);
+}
+
+function enumerateUiRoutes() {
+    var html = '',
+        $state = utils.getService('$state'),
+        routes = $state.get(),
+        names = [],
+        routesByName = {};
+
+    // first run - collect routes
+    angular.forEach(routes, function(route) {
+        names.push(route.name);
+        routesByName[route.name] = route;
+    });
+
+    // 2nd run - collect full urls (with parent)
+    angular.forEach(routes, function(route) {
+        var url = $state.href(route.name, null, {absolute: true}),
+            viewUrl = $state.href(route.name, null, {absolute: false});
+
+        if (url) {
+            html += '<tr class="nw"><th>'+ route.name + '</th><td><a href="' + url + '">' + viewUrl + '</a></td></tr>';
+        }
+    });
+
+    return [html, names, routesByName];
+}
+
+function enumerateNgRoutes() {
+    return 'TODO';
+}
+
+function detectRouter() {
+    try {
+        angular.module('ngRoute');      
+        return 'ng';
+    } catch (e) {}
+
+    try {
+        angular.module('ui.router');
+        return 'ui';
+    } catch (e) {}
+
+    return 'none';
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = initPlugin;
+}
+
+},{"../utils.js":8}],7:[function(require,module,exports){
 var utils = require('../utils.js')();
 
 
@@ -305,7 +383,7 @@ if (typeof module !== "undefined" && module.exports) {
 	module.exports = initPlugin;
 }
 
-},{"../utils.js":7}],7:[function(require,module,exports){
+},{"../utils.js":8}],8:[function(require,module,exports){
 var NgBarUtils = function() {
   var angular = window.angular;
 
