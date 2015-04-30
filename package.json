@@ -1,6 +1,6 @@
 {
   "name": "ng-bar",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Angular Debug Toolbar",
   "main": "ng-bar.js",
   "scripts": {

@@ -20,7 +20,7 @@
 
 
     function NgBar() {}
-    NgBar.prototype.version = '1.0.0';
+    NgBar.prototype.version = '1.0.7';
 
     NgBar.prototype.init = function() {     
         this._createContainer();

@@ -2,7 +2,7 @@ var NgBarUtils = function() {
   var angular = window.angular;
 
   function _getRootElm() {
-    return angular.element(document.querySelector('.ng-scope'));
+    return angular.element(document);
   }
 
 
