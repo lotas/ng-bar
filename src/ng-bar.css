@@ -77,7 +77,8 @@
   min-width: 180px;
   overflow-x: auto;
   overflow-y: auto;
-  background: #fff;
+  background: #fff !important;
+  color: #111111 !important;
   padding: 4px 20px 4px 10px;
 }
 #ng-bar .active {
@@ -119,4 +120,9 @@
 }
 #ng-bar .nw td, #ng-bar .nw th {
   white-space: nowrap;
+}
+
+#ng-bar .errors {
+  background: #ff0000;
+  color: #ffffff;
 }
