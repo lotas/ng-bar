@@ -33,7 +33,7 @@ var NgBarUtils = function() {
      * @return {Object} {count: int, watchers: int}
      */
     getScopesInfo: function() {
-      var rootScope = angular.element(document.querySelector('.ng-scope')).scope().$root;
+      var rootScope = angular.element(document).injector().get('$rootScope');
 
       var cnt = 0,
           watchers = 0;
@@ -47,7 +47,7 @@ var NgBarUtils = function() {
     },
 
     getService: function(service) {
-      return _getRootElm().injector().get(service);
+      return angular.element(document).injector().get(service);
     },
 
     getMemUsage: function() {
