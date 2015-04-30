@@ -75,6 +75,7 @@
   max-height: 300px;
   min-height: 40px;
   min-width: 180px;
+  overflow-x: auto;
   overflow-y: auto;
   background: #fff;
   padding: 4px 20px 4px 10px;
@@ -99,6 +100,11 @@
 #ng-bar li.has-sub:hover:after {
   content: '▶';
   float: right;
+}
+#ng-bar li h5 {
+  background: #eee;
+  margin:2px 0;
+  padding: 4px 0;
 }
 #ng-bar .hidden, #ng-bar-wrap.hidden {
   display: none;

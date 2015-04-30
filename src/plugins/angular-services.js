@@ -11,12 +11,18 @@ function initPlugin(elm) {
     setTimeout(function(){
         var names = [], 
             services = utils.enumerateServices(utils.guessMainModule()),
-            listElm = document.getElementById('ngbar-services-list');
+            listElm = document.getElementById('ngbar-services-list'),
+            groups = {};
 
         angular.forEach(services, function(obj, name) {
             if (angular.isUndefined(name)) {
                 return;
             }
+            if (angular.isUndefined(groups[obj[0]])) {
+                groups[obj[0]] = [];
+            }
+
+            groups[obj[0]].push(name);
             names.push(name);
             // console.log(obj);
         });        
@@ -25,8 +31,12 @@ function initPlugin(elm) {
         names.sort();
 
         var html = '';
-        angular.forEach(names, function(name) {
-            html += '<li class="has-sub" data-service="' + name + '"><a data-service="' + name + '">' + name + '</a></li>';
+        angular.forEach(groups, function(items, group) {
+            html += '<li><h5>' + group + '</h5></li>';
+            items.sort();
+            angular.forEach(items, function(name) {
+                html += '<li class="has-sub" data-service="' + name + '"><a data-service="' + name + '">' + name + '</a></li>';
+            });
         });
         listElm.innerHTML = '<ul id="ngbar-services-ul">' + html + '</ul>';
 
@@ -37,7 +47,7 @@ function initPlugin(elm) {
                 list = document.getElementById('ngbar-services-list');
 
             if (serviceName && services[serviceName]) {
-                document.getElementById('ngbar-services-details').innerHTML = buildServiceDetails(services[serviceName]);
+                document.getElementById('ngbar-services-details').innerHTML = buildServiceDetails(services[serviceName][1]);
                 subElm.style.display = '';
 
                 // adjust second sub position
@@ -60,14 +70,22 @@ function buildServiceDetails(service) {
     var callables = '';
     if (typeof service === 'function') {
         return '<li><b>Factory method</b></li><li>' + service.toString().substr(0, 100) + ' ...</li>';
+    } else if (angular.isString(service)) {
+        return '<li><b>"' + service + '"</b></li>';
     } else {
         angular.forEach(service, function(obj, name) {
             if (typeof obj === 'function') {
                 callables += '<li>&nbsp; ' + name + '</li>';
             }
         });
+
+        if (callables) {
+            callables = '<li><b>Methods:</b></li>' + callables;
+        } else {
+            callables = '<li><pre>' + JSON.stringify(service, null, 2) + '</pre></li>';
+        }
     }
-    return callables === '' ? '<i>no methods</i>' : '<li><b>Methods:</b></li>' + callables;
+    return callables === '' ? '<i>no info</i>' : callables;
 }
 
 if (typeof module !== "undefined" && module.exports) {

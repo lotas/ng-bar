@@ -43,7 +43,7 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4>angular.js v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
+        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
         this._container.appendChild(logo);
 
         var onoff = document.createElement('div');

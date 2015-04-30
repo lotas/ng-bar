@@ -2,7 +2,7 @@
 (function(){
     var utils = require('./utils.js')();
     
-    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-y: auto;\n  background: #fff;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}";
+    var cssString = "#ng-bar-wrap {\n  width: 100%;\n  position: fixed;\n  bottom: 0px;\n  z-index: 9999;\n  height: 32px;\n  font-family: Verdana;\n  font-size: 12px;\n  border:1px solid #11163E;\n  background-color: #FFF;\n\n/*  width:100%;\n  height: 24px;\n  position:fixed;\n  left:0;\n  right:0;\n  bottom:0;\n  padding:0 40px 10px 0;\n  font-family: Verdana;*/\n}\n#ng-bar {\n  margin-left: 24px;\n  margin-bottom: 28px;\n}\n\n#ng-bar>div {\n  padding: 2px 10px;\n  font-size: 12px;\n  display: block;\n  float: left;\n  border-right: 1px solid #000;\n  position: relative;\n  cursor: pointer;\n}\n#ng-bar h4 {\n  margin: 8px 8px;\n  font-family: Verdana;\n  font-size: 12px;\n}\n#ng-bar .logo {\n  float: right;\n  color: ##627E96;\n}\n#ng-bar-onoff {\n  width: 28px;\n  position: fixed;\n  bottom: 0px;\n  left: 0px;\n  z-index: 9999;\n  height: 32px;\n\n  padding: 4px;\n  line-height: 24px;\n  font-size: 14px;\n  font-weight: bold;\n  background: #EEE;\n  border: 1px solid #11163E;\n  border-left: none;\n  // border-radius: 0 4px 4px 0;\n}\n#ng-bar-onoff:hover {\n  background: #EFEEEF;\n}\n#ng-bar .ngbar-app-name {\n  margin-left: 8px;\n}\n\n#ng-bar .sub {\n  display: none;\n  position: absolute;\n  bottom: 32px;\n  left: 0;\n  margin-bottom: 2px;\n  border: 1px solid #ccc;\n  max-height: 300px;\n  min-height: 40px;\n  min-width: 180px;\n  overflow-x: auto;\n  overflow-y: auto;\n  background: #fff;\n  padding: 4px 20px 4px 10px;\n}\n#ng-bar .active {\n  background: #C9E7F4;\n}\n#ng-bar .active .sub {\n  display: block;\n}\n\n#ng-bar .ng-bar-plugin {\n  \n}\n#ng-bar .sub ul {\n  padding-left: 15px;\n}\n#ng-bar .sub li { \n  list-style-type: none;\n  white-space: nowrap;\n}\n#ng-bar li.has-sub:hover:after {\n  content: '▶';\n  float: right;\n}\n#ng-bar li h5 {\n  background: #eee;\n  margin:2px 0;\n  padding: 4px 0;\n}\n#ng-bar .hidden, #ng-bar-wrap.hidden {\n  display: none;\n}\n#ng-bar .cnt {\n  font-weight: bold;\n  paddin-left: 10px;\n  color: #302F31;\n}\n#ng-bar table  {\n  margin: 4px 10px 4px 10px;\n}\n#ng-bar .nw td, #ng-bar .nw th {\n  white-space: nowrap;\n}";
 
     // var _ = require('lodash');
 
@@ -44,7 +44,7 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = '<h4>angular.js v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
+        logo.innerHTML = '<h4>v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">∆</a></h4>';
         this._container.appendChild(logo);
 
         var onoff = document.createElement('div');
@@ -178,12 +178,18 @@ function initPlugin(elm) {
     setTimeout(function(){
         var names = [], 
             services = utils.enumerateServices(utils.guessMainModule()),
-            listElm = document.getElementById('ngbar-services-list');
+            listElm = document.getElementById('ngbar-services-list'),
+            groups = {};
 
         angular.forEach(services, function(obj, name) {
             if (angular.isUndefined(name)) {
                 return;
             }
+            if (angular.isUndefined(groups[obj[0]])) {
+                groups[obj[0]] = [];
+            }
+
+            groups[obj[0]].push(name);
             names.push(name);
             // console.log(obj);
         });        
@@ -192,8 +198,12 @@ function initPlugin(elm) {
         names.sort();
 
         var html = '';
-        angular.forEach(names, function(name) {
-            html += '<li class="has-sub" data-service="' + name + '"><a data-service="' + name + '">' + name + '</a></li>';
+        angular.forEach(groups, function(items, group) {
+            html += '<li><h5>' + group + '</h5></li>';
+            items.sort();
+            angular.forEach(items, function(name) {
+                html += '<li class="has-sub" data-service="' + name + '"><a data-service="' + name + '">' + name + '</a></li>';
+            });
         });
         listElm.innerHTML = '<ul id="ngbar-services-ul">' + html + '</ul>';
 
@@ -204,7 +214,7 @@ function initPlugin(elm) {
                 list = document.getElementById('ngbar-services-list');
 
             if (serviceName && services[serviceName]) {
-                document.getElementById('ngbar-services-details').innerHTML = buildServiceDetails(services[serviceName]);
+                document.getElementById('ngbar-services-details').innerHTML = buildServiceDetails(services[serviceName][1]);
                 subElm.style.display = '';
 
                 // adjust second sub position
@@ -227,14 +237,22 @@ function buildServiceDetails(service) {
     var callables = '';
     if (typeof service === 'function') {
         return '<li><b>Factory method</b></li><li>' + service.toString().substr(0, 100) + ' ...</li>';
+    } else if (angular.isString(service)) {
+        return '<li><b>"' + service + '"</b></li>';
     } else {
         angular.forEach(service, function(obj, name) {
             if (typeof obj === 'function') {
                 callables += '<li>&nbsp; ' + name + '</li>';
             }
         });
+
+        if (callables) {
+            callables = '<li><b>Methods:</b></li>' + callables;
+        } else {
+            callables = '<li><pre>' + JSON.stringify(service, null, 2) + '</pre></li>';
+        }
     }
-    return callables === '' ? '<i>no methods</i>' : '<li><b>Methods:</b></li>' + callables;
+    return callables === '' ? '<i>no info</i>' : callables;
 }
 
 if (typeof module !== "undefined" && module.exports) {
@@ -476,7 +494,7 @@ var NgBarUtils = function() {
     });
     angular.forEach(angular.module(mod)._invokeQueue, function(a) {
       try { 
-        r[a[2][0]] = inj(a[2][0]); 
+        r[a[2][0]] = [a[1], inj(a[2][0])]; 
       } catch (e) {}
     });
     return r;
