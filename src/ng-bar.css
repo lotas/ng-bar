@@ -88,6 +88,10 @@
 }
 .ng-bar-plugin h4 span {
   font-weight: bolder;
+  padding: 2px 4px;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background: #eeeeee;
 }
 .ng-bar-plugin .sub {
   display: none;

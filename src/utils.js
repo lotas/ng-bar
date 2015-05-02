@@ -26,10 +26,10 @@ var NgBarUtils = function() {
       var app = document.querySelector('[ng-app]').attributes['ng-app'].value;
       return app ? app : 'ng';
     },
-    
+
     /**
      * Get number of scopes and watchers
-     * 
+     *
      * @return {Object} {count: int, watchers: int}
      */
     getScopesInfo: function() {
@@ -89,8 +89,8 @@ var NgBarUtils = function() {
       enumerateAllServices(m,r);
     });
     angular.forEach(angular.module(mod)._invokeQueue, function(a) {
-      try { 
-        r[a[2][0]] = [a[1], inj(a[2][0])]; 
+      try {
+        r[a[2][0]] = [a[1], inj(a[2][0])];
       } catch (e) {}
     });
     return r;

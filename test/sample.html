@@ -10,11 +10,11 @@
 
   <body>
     <h1>Hello Angular</h1>
-    
+
     <p>Please fill out <b>Email</b> and <b>Name</b> fields</p>
     <p>Why is name not shown?</p>
-    
-    
+
+
     <form name="myForm">
       <div>
         <input type="text" name="email" ng-model="email" placeholder="email" required />
@@ -25,7 +25,7 @@
       <div>
         <input type="text" ng-model="name" name="name" required placeholder="name" ng-if="showName" />
       </div>
-      
+
       <input type="submit" value="Submit"/>
     </form>
 
@@ -35,7 +35,7 @@
       </ol>
       <a ng-click="items.push(items.length);">Add more</a>
     </div>
-    
+
     <div>
       <h4>Form values:</h4>
       <ul>
@@ -43,7 +43,7 @@
         <li>Email: {{ email }}</li>
       </ul>
     </div>
-    
+
     <script type="text/javascript" src="ng-bar.js"></script>
   </body>
 </html>

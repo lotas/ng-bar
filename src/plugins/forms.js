@@ -2,7 +2,7 @@ var utils = require('../utils.js')();
 
 
 /**
- * 
+ *
  */
 function initPlugin(elm) {
 	var handlerInstalled = false;
@@ -10,19 +10,20 @@ function initPlugin(elm) {
 
     setTimeout(function showFormsInfo(){
     	var forms = [];
-    	angular.forEach(document.querySelectorAll('form'), function(form) { 
-    		forms.push(form); 
+    	angular.forEach(document.querySelectorAll('form'), function(form) {
+    		forms.push(form);
     	});
-    	angular.forEach(document.querySelectorAll('ng-form'), function(form) { 
-    		forms.push(form); 
+    	angular.forEach(document.querySelectorAll('ng-form'), function(form) {
+    		forms.push(form);
     	});
-    	// console.log(forms);
-        document.getElementById('ngbar-forms').innerHTML = forms.length;
+
+    	var counter = document.getElementById('ngbar-forms');
+    	counter.innerHTML = forms.length;
 
         if (hasErrors(forms)) {
-        	angular.element(elm).addClass('errors');
+        	angular.element(counter).addClass('errors');
         } else {
-        	angular.element(elm).removeClass('errors');
+        	angular.element(counter).removeClass('errors');
         }
 
         var info = document.getElementById('ngbar-forms-info')
@@ -43,9 +44,12 @@ function initPlugin(elm) {
     }, 1000);
 }
 
+/**
+ * TODO: Detect elements without names
+ */
 function getFieldsInfo(forms) {
 	var html = '';
-	
+
 	angular.forEach(forms, function(form) {
 		var name = form.name || form.attributes['name'].value,
 			ngForm = angular.element(form).scope()[name];
