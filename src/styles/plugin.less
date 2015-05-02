@@ -43,8 +43,8 @@
         padding: 4px 0 4px 10px;
       }
     }
-    li.has-sub:hover:after {
-      content: '▶';
+    li.has-sub:hover:before {
+      content: '>';
       float: right;
     }
 
@@ -73,5 +73,25 @@
       white-space: nowrap;
     }
   }
-  
+
+  // Plugins
+  .missing {
+    color: lighten(@text-color, 30%);
+  }
+  h4.forms {
+    .embed-icon('./img/form.png');
+  }
+  h4.ui-router {
+    .embed-icon('./img/ui.png');
+  }
+  h4.ng-route {
+    .embed-icon('./img/angular.png');
+  }
+  h4.services {
+    .embed-icon('./img/cog.png');
+  }
+  h4.plug {
+    .embed-icon('./img/plug.png');
+  }
+
 }

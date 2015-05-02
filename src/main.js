@@ -47,7 +47,7 @@
 
         var logo = document.createElement('div');
         logo.className = 'logo';
-        logo.innerHTML = 'v.'  + angular.version.full + ' &nbsp; <a href="https://github.com/lotas/ng-bar">ng-bar</a>';
+        logo.innerHTML = '<span class="angular">' + angular.version.full + '</span><a class="github" href="https://github.com/lotas/ng-bar"></a> ';
         this._container.appendChild(logo);
 
         var isHidden = localStorage.getItem('ng-bar.is') === '1';
@@ -94,13 +94,13 @@
             plugin._elm = elm;
             plugin(elm);
 
-            angular.element(elm).on('click', self.elmClickHandler);
+            elm.addEventListener('click', self.elmClickHandler);
 
             self.plugins.push(plugin);
         });
     };
     NgBar.prototype.elmClickHandler = function(e) {
-        var elm = angular.element(e.toElement);
+        var elm = angular.element(e.target);
 
         if (utils.hasParentWithClass(elm, 'sub')) {
             return false;
@@ -113,8 +113,7 @@
 
         elm.toggleClass('active');
     };
-    
-    
+
 
     if (document.loaded) {
         runNgBar();

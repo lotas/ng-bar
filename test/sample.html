@@ -17,13 +17,13 @@
     
     <form name="myForm">
       <div>
-        <input type="text" ng-model="email" placeholder="email" />
+        <input type="text" name="email" ng-model="email" placeholder="email" required />
       </div>
       <div>
-        <label><input type="checkbox" ng-model="showName" /> Show name</label>
+        <label><input type="checkbox" name="showName" ng-model="showName" /> Show name</label>
       </div>
       <div>
-        <input type="text" ng-model="name" placeholder="name" ng-if="showName" />
+        <input type="text" ng-model="name" name="name" required placeholder="name" ng-if="showName" />
       </div>
       
       <input type="submit" value="Submit"/>

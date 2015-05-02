@@ -4,7 +4,7 @@ var utils = require('../utils.js')();
  * 
  */
 function initPlugin(elm) {
-    elm.innerHTML = '<h4>Services: <span id="ngbar-services">...</span></h4>' +
+    elm.innerHTML = '<h4 class="services">Services: <span id="ngbar-services">...</span></h4>' +
         '<div class="sub" id="ngbar-services-list"></div>' +
         '<div class="sub" style="display: none;" id="ngbar-services-sub"><ul id="ngbar-services-details"></ul></div>';
 
@@ -40,8 +40,8 @@ function initPlugin(elm) {
         });
         listElm.innerHTML = '<ul id="ngbar-services-ul">' + html + '</ul>';
 
-        angular.element(listElm).on('click', function(e){
-            var elm = angular.element(e.toElement),
+        listElm.addEventListener('click', function(e){
+            var elm = angular.element(e.target),
                 serviceName = elm.attr('data-service'),
                 subElm = document.getElementById('ngbar-services-sub'),
                 list = document.getElementById('ngbar-services-list');

@@ -8,16 +8,16 @@ function initPlugin(elm) {
 		var mainModule = utils.guessMainModule();
 		var deps = buildDeps(mainModule);
 
-		elm.innerHTML = '<h4>ng-app <span class="ngbar-app-name"><strong>' + mainModule + '</strong></h4>' + 
+		elm.innerHTML = '<h4 class="plug" title="Application dependencies"><span class="ngbar-app-name"><strong>' + mainModule + '</strong></h4>' + 
 			 '<div class="sub" id="ngbar-app-deps">' + deps + '</div>' + 
 			 '<div class="sub" style="display: none;" id="ngbar-app-services"><ul id="ngbar-app-services-details"></ul></div>';
 
-	    angular.element(document.getElementById('ngbar-app-deps')).on('click', onDepClickHandler);
+	    document.getElementById('ngbar-app-deps').addEventListener('click', onDepClickHandler);
 	}, 500);
 }
 
 function buildDeps(mod) {
-	var html = '<li><b>Requires:</b></li>';
+	var html = '<li><h5>App Dependencies:</h5></li>';
 
 	angular.forEach(angular.module(mod).requires, function(elm) {
 		// those hacks probably wouldn't be appreciated much
@@ -39,7 +39,7 @@ function buildDepDetails(mod) {
 }
 
 function onDepClickHandler(e){
-    var elm = angular.element(e.toElement),
+    var elm = angular.element(e.target),
         depName = elm.attr('data-dep'),
         subElm = document.getElementById('ngbar-app-services'),
         list = document.getElementById('ngbar-app-deps');

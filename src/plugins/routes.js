@@ -18,9 +18,12 @@ function initPlugin(elm) {
         if (router === 'ui') {
             var routes = enumerateUiRoutes();
             routerInfo.innerHTML += ' (' + routes[1].length + ')';
-            routesList.innerHTML = '<h5>ui-router routes</h5><table>' + routes[0] + '</table>';         
+            routesList.innerHTML = '<h5>ui-router routes</h5><table>' + routes[0] + '</table>';
+
+            elm.querySelector('h4').className = 'ui-router';
         } else {
             routesList.innerHTML = 'TODO '+ router;
+            elm.querySelector('h4').className = 'ng-route';
         }
         
     }, 1000);

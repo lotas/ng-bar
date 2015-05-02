@@ -6,7 +6,7 @@ var utils = require('../utils.js')();
  */
 function initPlugin(elm) {
 	var handlerInstalled = false;
-    elm.innerHTML = '<h4>Forms: <span id="ngbar-forms">...</span></h4><div class="sub" id="ngbar-forms-info"></div>';
+    elm.innerHTML = '<h4 class="forms">Forms: <span id="ngbar-forms">...</span></h4><div class="sub" id="ngbar-forms-info"></div>';
 
     setTimeout(function showFormsInfo(){
     	var forms = [];
@@ -30,16 +30,16 @@ function initPlugin(elm) {
 
         if (!handlerInstalled) {
         	handlerInstalled = true;
-	        angular.element(info).on('click', function(e) {
-	        	if (e.toElement.attributes && e.toElement.attributes['name']) {
-	        		var elm = document.querySelector('[name="' + e.toElement.attributes['name'].value + '"]');
+	        info.addEventListener('click', function(e) {
+	        	if (e.target.attributes && e.target.attributes['name']) {
+	        		var elm = document.querySelector('[name="' + e.target.attributes['name'].value + '"]');
 	        		elm.focus();
 	        	}
 	        	return false;
 	        });
 	    }
 
-        setTimeout(showFormsInfo, 1000);
+        setTimeout(showFormsInfo, 5000);
     }, 1000);
 }
 
