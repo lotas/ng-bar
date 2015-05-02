@@ -10,8 +10,10 @@ Just though it would be nice to have such tool that would show some usefull info
 * Angular version
 * Angular modules
 * Angular services
-* Angular forms 
-* ui-router routes list (TODO ngRoute)
+* Angular forms
+* Router info (ngRoute, ui.router registered states & routes)
+
+TODO:
 * active http requests
 * errors happening
 * included templates ($tempalteCache fun)
@@ -20,18 +22,18 @@ Just though it would be nice to have such tool that would show some usefull info
 
 ## Build
 
-Build with: 
+Build with:
 
 	npm run build
 
 ## Usage
 
-Simply add this: 
+Simply add this:
 
 	<script src="ng-bar.js"></script>
 
 
-## Ideas from 
+## Ideas from
 
 https://github.com/paulirish/memory-stats.js
 
