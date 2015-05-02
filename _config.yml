@@ -1,0 +1,10 @@
+# Site settings
+title: ng-bar Angular 1.x debug toolbar
+email: me@yaraslav.com
+description: Helps to debug Angular 1.x applications
+baseurl: "/ng-bar" # the subpath of your site, e.g. /blog/
+url: "http://lotas.github.io/ng-bar/" # the base hostname & protocol for your site
+
+
+# Build settings
+markdown: kramdown
