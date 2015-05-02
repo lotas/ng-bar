@@ -346,7 +346,7 @@ function getFieldsInfo(forms) {
 	angular.forEach(forms, function(form) {
 		var name = form.name || form.attributes['name'].value,
 			ngForm = angular.element(form).scope()[name];
-console.log(name, ngForm);
+
 		if (!ngForm) {
 			return false;
 		}
@@ -421,7 +421,7 @@ if (typeof module !== "undefined" && module.exports) {
 var utils = require('../utils.js')();
 
 /**
- *  Routes debug 
+ *  Routes debug
  */
 function initPlugin(elm) {
     elm.innerHTML = '<h4>Routes: <span id="ngbar-router">...</span></h4><div class="sub" id="ngbar-router-routes"></div>';
@@ -437,15 +437,18 @@ function initPlugin(elm) {
 
         if (router === 'ui') {
             var routes = enumerateUiRoutes();
-            routerInfo.innerHTML += ' (' + routes[1].length + ')';
+            routerInfo.innerHTML = routes[1].length;
             routesList.innerHTML = '<h5>ui-router routes</h5><table>' + routes[0] + '</table>';
 
             elm.querySelector('h4').className = 'ui-router';
         } else {
-            routesList.innerHTML = 'TODO '+ router;
+            var routes = enumerateNgRoutes();
+            routerInfo.innerHTML = routes[1].length;
+            routesList.innerHTML = '<h5>ngRoute routes</h5><table>' + routes[0] + '</table>';
+
             elm.querySelector('h4').className = 'ng-route';
         }
-        
+
     }, 1000);
 }
 
@@ -476,12 +479,30 @@ function enumerateUiRoutes() {
 }
 
 function enumerateNgRoutes() {
-    return 'TODO';
+    var html = '',
+        $route = utils.getService('$route'),
+        routes = $route.routes,
+        names = [],
+        routesByName = {};
+
+    // first run - collect routes
+    angular.forEach(routes, function(route) {
+        names.push(route.originalPath);
+        routesByName[route.originalPath] = route;
+
+        if (angular.isUndefined(route.originalPath)) {
+            html += '<tr class="nw"><th>Otherwise:</th><td colspan="2">' + route.redirectTo + '</td></tr>';
+        } else {
+            html += '<tr class="nw"><td><a href="' + route.originalPath + '">' + route.originalPath + '</a></td><td>' + (route.controller || 'n/a') + '</td><td>' + (route.templateUrl || 'n/a') + '</td></tr>';
+        }
+    });
+
+    return [html, names, routesByName];
 }
 
 function detectRouter() {
     try {
-        angular.module('ngRoute');      
+        angular.module('ngRoute');
         return 'ng';
     } catch (e) {}
 
