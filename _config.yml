@@ -8,3 +8,6 @@ url: "http://lotas.github.io/ng-bar/" # the base hostname & protocol for your si
 
 # Build settings
 markdown: kramdown
+
+github_username: lotas
+twitter_username: lotask

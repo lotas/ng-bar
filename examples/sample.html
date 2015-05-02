@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="my">
+
+  <head>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.6/angular.js"></script>
+    <script type="text/javascript">
+      angular.module('my', ['ngLocale']);
+    </script>
+    <style>
+      .red {color:red};
+    </style>
+  </head>
+
+  <body>
+    <a href="/ng-bar/examples/sample.html">Simple</a>
+    |
+    <a href="/ng-bar/examples/dependencies.html">Dependencies</a>
+    |
+    <a href="/ng-bar/examples/routes.html">Routes: ngRoute</a>
+    |
+    <a href="/ng-bar/examples/ui-router.html" target="_self">Routes: ui.router</a>
+    <hr>
+    <h1>Ng-Bar</h1>
+    <h2>Example: Simple app</h2>
+
+
+    <form name="myForm">
+      <div>
+        <input type="text" name="email" ng-model="email" placeholder="email" required />
+      </div>
+      <div>
+        <label><input type="checkbox" name="showName" ng-model="showName" /> Show name</label>
+      </div>
+      <div>
+        <input type="text" ng-model="name" name="name" required placeholder="name" ng-if="showName" />
+      </div>
+
+      <input type="submit" value="Submit"/>
+    </form>
+
+    <div >
+      <ol ng-init="items = ['one', 'two', 'three']">
+        <li ng-repeat="name in items">{{name}}</li>
+      </ol>
+      <a ng-click="items.push(items.length);">Add more scopes</a>
+    </div>
+
+    <div>
+      <h4>Form values:</h4>
+      <ul>
+        <li class="red">Name: {{ name }}</li>
+        <li>Email: {{ email }}</li>
+      </ul>
+    </div>
+
+    <script type="text/javascript" src="ng-bar.js"></script>
+  </body>
+</html>

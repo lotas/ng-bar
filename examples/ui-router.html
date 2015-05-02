@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="app.with.ui-routes">
+  <head>
+
+  <script type="text/javascript">
+    // dynamically add base tag
+    (function() {
+      var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
+          rUrl = /(#!\/|examples|index[^\.]*\.html).*$/,
+          baseUrl = location.href.replace(rUrl, indexFile),
+          headEl = document.getElementsByTagName('head')[0],
+          sync = true;
+
+      addTag('base', {href: baseUrl});
+
+      addTag('script', {src: '//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.1/angular.min.js' }, sync);
+      addTag('script', {src: 'http://angular-ui.github.io/ui-router/release/angular-ui-router.js' }, sync);
+
+      function addTag(name, attributes, sync) {
+        var el = document.createElement(name),
+            attrName;
+
+        for (attrName in attributes) {
+          el.setAttribute(attrName, attributes[attrName]);
+        }
+
+        sync ? document.write(outerHTML(el)) : headEl.appendChild(el);
+      }
+
+      function outerHTML(node){
+        // if IE, Chrome take the internal method otherwise build one
+        return node.outerHTML || (
+            function(n){
+                var div = document.createElement('div'), h;
+                div.appendChild(n);
+                h = div.innerHTML;
+                div = null;
+                return h;
+            })(node);
+      }
+    })();
+    </script>
+
+    <script type="text/javascript">
+      angular.module('app.with.ui-routes', ['ui.router'])
+      .config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider
+          .when('/other', '/other')
+          .otherwise('/');
+
+        $stateProvider
+          .state("home", {
+            url: "/",
+            template: '<p class="lead">Welcome to the UI-Router Demo</p>' +
+              '<p>Use the menu above to navigate. ' +
+              'Pay attention to the <code>$state</code> and <code>$stateParams</code> values below.</p>' +
+              '<p>Click these links—<a href="#/c?id=1">Alice</a> or ' +
+              '<a href="#/user/42">Bob</a>—to see a url redirect in action.</p>'
+          })
+          .state('about', {
+            url: '/about',
+            templateProvider: ['$timeout',
+              function (        $timeout) {
+                return $timeout(function () {
+                  return '<p class="lead">UI-Router Resources</p><ul>' +
+                           '<li><a href="https://github.com/angular-ui/ui-router/tree/master/sample">Source for this Sample</a></li>' +
+                           '<li><a href="https://github.com/angular-ui/ui-router">Github Main Page</a></li>' +
+                           '<li><a href="https://github.com/angular-ui/ui-router#quick-start">Quick Start</a></li>' +
+                           '<li><a href="https://github.com/angular-ui/ui-router/wiki">In-Depth Guide</a></li>' +
+                           '<li><a href="https://github.com/angular-ui/ui-router/wiki/Quick-Reference">API Reference</a></li>' +
+                         '</ul>';
+                }, 100);
+              }]
+          })
+      });
+    </script>
+    <style>
+      .red {color:red};
+    </style>
+  </head>
+
+  <body>
+    <a href="/ng-bar/examples/sample.html" target="_self">Simple</a>
+    |
+    <a href="/ng-bar/examples/dependencies.html" target="_self">Dependencies</a>
+    |
+    <a href="/ng-bar/examples/routes.html" target="_self">Routes: ngRoute</a>
+    |
+    <a href="/ng-bar/examples/ui-router.html" target="_self">Routes: ui.router</a>
+    <hr>
+    <h1>Ng-Bar</h1>
+    <h2>Example: ui.router</h2>
+
+    <div >
+      <a ui-sref="home">Home</a> |
+      <a ui-sref="about">About</a>
+
+      <div ui-view></div>
+
+    </div>
+
+
+    <script type="text/javascript" src="ng-bar.js"></script>
+  </body>
+</html>

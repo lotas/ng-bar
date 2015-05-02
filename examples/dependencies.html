@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app.with.deps">
+
+  <head>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.6/angular.js"></script>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.6/angular-route.js"></script>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.6/angular-touch.js"></script>
+    <script data-require="angular.js@*" data-semver="1.4.0-beta.2" src="https://code.angularjs.org/1.4.0-beta.6/angular-cookies.js"></script>
+
+    <script type="text/javascript">
+      angular.module('app.with.deps', ['ngLocale', 'ngRoute', 'ngTouch', 'ngCookies'])
+        .constant('constant-value', {obj: 'here'});
+    </script>
+    <style>
+      .red {color:red};
+    </style>
+  </head>
+
+  <body>
+    <a href="/ng-bar/examples/sample.html">Simple</a>
+    |
+    <a href="/ng-bar/examples/dependencies.html">Dependencies</a>
+    |
+    <a href="/ng-bar/examples/routes.html">Routes: ngRoute</a>
+    |
+    <a href="/ng-bar/examples/ui-router.html" target="_self">Routes: ui.router</a>
+    <hr>
+    <h1>Ng-Bar</h1>
+    <h2>Example: Application with dependencies</h2>
+
+    <div >
+      <ol ng-init="items = ['one', 'two', 'three']">
+        <li ng-repeat="name in items">{{name}}</li>
+      </ol>
+      <a ng-click="items.push(items.length);">Add more scopes</a>
+    </div>
+
+    <script type="text/javascript" src="ng-bar.js"></script>
+  </body>
+</html>
