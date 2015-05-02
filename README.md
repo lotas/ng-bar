@@ -20,6 +20,20 @@ TODO:
 
 
 
+## Install
+
+* Clone this repository
+* Using bower:
+
+	bower install ng-bar
+
+
+Install dev-dependencies with
+
+	npm install
+
+
+
 ## Build
 
 Build with:
