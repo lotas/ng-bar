@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "Angular Debug Toolbar",
   "main": "ng-bar.js",
-  "respository": {
+  "repository": {
     "type": "git",
     "url": "git://github.com/lots/ng-bar.git"
   },
