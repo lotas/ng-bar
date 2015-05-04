@@ -37,7 +37,7 @@
   color: #111111;
 }
 #ng-bar > div {
-  padding: 2px 10px;
+  padding: 2px 5px;
   font-size: 12px;
   display: block;
   float: left;
@@ -81,6 +81,12 @@
 #ng-bar .ngbar-app-name {
   margin-left: 8px;
 }
+.ng-bar-plugin {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 .ng-bar-plugin h4 {
   margin: 8px;
   font-family: Verdana;
@@ -96,18 +102,22 @@
 .ng-bar-plugin .sub {
   display: none;
   position: absolute;
-  bottom: 32px;
+  bottom: 33px;
   left: 0;
   margin-bottom: 2px;
-  border: 1px solid #ccc;
+  border: 1px solid #1c2466;
   max-height: 300px;
   min-height: 40px;
   min-width: 180px;
   overflow-x: auto;
   overflow-y: auto;
-  background: #fff !important;
+  background: #ffffff !important;
   color: #111111 !important;
   padding: 4px 20px 4px 10px;
+  user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
 }
 .ng-bar-plugin .sub ul {
   padding-left: 10px;
@@ -129,6 +139,13 @@
   font-weight: bold;
   paddin-left: 10px;
   color: #333333;
+}
+.ng-bar-plugin .help {
+  font-weight: normal;
+  display: none;
+}
+.ng-bar-plugin:hover .help {
+  display: inline;
 }
 .ng-bar-plugin.active {
   background: #c9e7f4;
@@ -170,4 +187,12 @@
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAfCAYAAAAbW8YEAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUCDQgIg4/SyAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAALHSURBVEjH7ddRSFNRGAfw/9mc4rooViZpJSuKsE0iCCNC16tIalAgPZhb1Ax8Mc0lQYG4F52WI8npULDEJzVFyKQEDcvCCrRCM9ECrZmII6851/16kdqm3bstZwSdx8Pl/u75vu9851xGRNjoIcNfGOuEEpxTj+lu1Q2y3X9HC4L40yHrAS6ONVOBzowBHgDuYTyqg0qTOBaklXqDALCAmTknhOCEdy0QCE3MRX5ylOiLZb4C/Fg71Xd9IKcEWGs5i/1Kxv4wpwR+tIku6SvxfDECQ3w9XdP0o9gLVGhyYa3S4cAmcRAAmPg+JXx730z5OWY8438FJxwCFuEOGlBr0UPNeYLfZ3rpZuF1NL1RIOliJcqyE5iSSYRXmH9K5XnuIABvUH0BVotuNWjvIZM+H03DDkCYxYC1Dq94kER4eQzVlKDNLvJV27Nwy6KHhpN5gC77IzLpL6N92m1y90HEhUoUkjD3hGyiIoDpTjR2f8SSB/iQSnVeYGw6yirPIF4BJoouvO7EoFOqJBzoM+XA2DJJSwBcn7upJKcIHZ/cwQyU24pxPFrOJKp3GTNvJzxWIAUXfskmrs2CB3Zv8Aq0bqAIKoCf4/1oFA70Wy2eU3GZMNuMSNkqZz7uU4YwLizwZrXjJCrqipC8BiiSUwViEuKhCPDgUp/OwpHfgCIoA5eYhkMBqQKGK87B2DpJTn97r2zzMXY+c1uA8Z1Hb2MrRlaage8NX3DBFcYFZsamo+x2HjRKMN8bvuDAi2oD5TaO++0x1SmYqwuQHO1PTldAQ8Oo20GshGpPJKQuIapUI+40FIqCq1e6JhgJ7dV6mE7EsNnBTmpp70Lv4Agm7F8hhCixZedeqA9rkZqRjpR9EUzuSzR+Hm1iYMYuFhqU2yD/kmo2ABSp3uCBnuFdnqKe1h5MLTOEq7RIOxobFNCH68r/34p/EP0BIpI91X+FzxwAAAAASUVORK5CYII=") no-repeat left top;
   background-size: contain;
   padding-left: 18px;
+}
+.ng-bar-plugin #ngbar-scopes {
+  margin-left: 8px;
+  background: #eaeef8;
+}
+.ng-bar-plugin #ngbar-watchers {
+  margin-left: 8px;
+  background: #FFF5F8;
 }

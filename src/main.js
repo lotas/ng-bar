@@ -8,10 +8,10 @@
     var ngBarPlugins = [
         require('./plugins/angular-info.js'),
         require('./plugins/memory-usage.js'),
-        require('./plugins/scopes-info.js'),
         require('./plugins/angular-services.js'),
+        require('./plugins/forms.js'),
         require('./plugins/routes.js'),
-        require('./plugins/forms.js')
+        require('./plugins/route-info.js')
     ];
 
     if (typeof window.angular === 'undefined') {

@@ -57,6 +57,15 @@
               '<p>Click these links—<a href="#/c?id=1">Alice</a> or ' +
               '<a href="#/user/42">Bob</a>—to see a url redirect in action.</p>'
           })
+          .state("secret", {
+            url: "/secret?p&q&s",
+            template: '<p class="lead">Welcome to the UI-Router Demo</p>' +              
+              'This was a secret page until now.</p>',
+
+            controller: function($scope, $stateParams) {
+              $scope.params = $stateParams;
+            }
+          })
           .state('about', {
             url: '/about',
             templateProvider: ['$timeout',
@@ -94,6 +103,7 @@
     <div >
       <a ui-sref="home">Home</a> |
       <a ui-sref="about">About</a>
+      <a ui-sref="secret({p: '1', q: 'one', s: 'uno'})">Secret</a>
 
       <div ui-view></div>
 

@@ -6,7 +6,7 @@ var utils = require('../utils.js')();
  */
 function initPlugin(elm) {
 	var handlerInstalled = false;
-    elm.innerHTML = '<h4 class="forms">Forms: <span id="ngbar-forms">...</span></h4><div class="sub" id="ngbar-forms-info"></div>';
+    elm.innerHTML = '<h4 class="forms"><i class="help">Forms:</i> <span id="ngbar-forms">...</span></h4><div class="sub" id="ngbar-forms-info"></div>';
 
     setTimeout(function showFormsInfo(){
     	var forms = [];

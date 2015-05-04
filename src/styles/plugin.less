@@ -1,4 +1,8 @@
 .ng-bar-plugin {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 
   // widget title
   h4 {
@@ -20,18 +24,23 @@
   .sub {
     display: none;
     position: absolute;
-    bottom: 32px;
+    bottom: 33px;
     left: 0;
     margin-bottom: 2px;
-    border: 1px solid #ccc;
+    border: 1px solid @plugin-sub-border;
     max-height: 300px;
     min-height: 40px;
     min-width: 180px;
     overflow-x: auto;
     overflow-y: auto;
-    background: #fff !important;
-    color: #111111 !important;
+    background: @plugin-sub-background !important;
+    color: @plugin-sub-color !important;
     padding: 4px 20px 4px 10px;
+
+    user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
 
     ul {
       padding-left: 10px;
@@ -59,6 +68,16 @@
     font-weight: bold;
     paddin-left: 10px;
     color: @count-info-color;
+  }
+
+  .help {
+    font-weight: normal;
+    display: none;
+  }
+  &:hover {
+    .help {
+      display: inline;
+    }
   }
 
   &.active {
@@ -98,4 +117,13 @@
     .embed-icon('./img/plug.png');
   }
 
+
+  #ngbar-scopes {
+    margin-left: 8px;
+    background: #EAEEF8
+  }
+  #ngbar-watchers {
+    margin-left: 8px;
+    background: #FFF5F8;
+  }
 }

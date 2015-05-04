@@ -77,6 +77,21 @@ var NgBarUtils = function() {
             elm = elm.parent();
         }
         return elm.hasClass(className);
+    },
+
+
+    detectRouter: function() {
+      try {
+          angular.module('ngRoute');
+          return 'ng';
+      } catch (e) {}
+
+      try {
+          angular.module('ui.router');
+          return 'ui';
+      } catch (e) {}
+
+      return 'none';
     }
   };
 

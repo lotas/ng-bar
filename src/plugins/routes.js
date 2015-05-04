@@ -4,7 +4,7 @@ var utils = require('../utils.js')();
  *  Routes debug
  */
 function initPlugin(elm) {
-    elm.innerHTML = '<h4>Routes: <span id="ngbar-router">...</span></h4><div class="sub" id="ngbar-router-routes"></div>';
+    elm.innerHTML = '<h4><i class="help">Routes:</i> <span id="ngbar-router">...</span></h4><div class="sub" id="ngbar-router-routes"></div>';
 
     setTimeout(function(){
 
@@ -12,7 +12,7 @@ function initPlugin(elm) {
             routesList = document.getElementById('ngbar-router-routes');
 
         // detect routing: angular or ui-router
-        var router = detectRouter();
+        var router = utils.detectRouter();
         routerInfo.innerHTML = router;
 
         if (router === 'ui') {
@@ -80,19 +80,6 @@ function enumerateNgRoutes() {
     return [html, names, routesByName];
 }
 
-function detectRouter() {
-    try {
-        angular.module('ngRoute');
-        return 'ng';
-    } catch (e) {}
-
-    try {
-        angular.module('ui.router');
-        return 'ui';
-    } catch (e) {}
-
-    return 'none';
-}
 
 if (typeof module !== "undefined" && module.exports) {
     module.exports = initPlugin;

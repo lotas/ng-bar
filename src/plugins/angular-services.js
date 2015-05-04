@@ -4,7 +4,7 @@ var utils = require('../utils.js')();
  * 
  */
 function initPlugin(elm) {
-    elm.innerHTML = '<h4 class="services">Services: <span id="ngbar-services">...</span></h4>' +
+    elm.innerHTML = '<h4 class="services"><i class="help">Services:</i> <span id="ngbar-services">...</span></h4>' +
         '<div class="sub" id="ngbar-services-list"></div>' +
         '<div class="sub" style="display: none;" id="ngbar-services-sub"><ul id="ngbar-services-details"></ul></div>';
 
