@@ -135,6 +135,12 @@
   content: '>';
   float: right;
 }
+.ng-bar-plugin .sub pre {
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 4px;
+}
 .ng-bar-plugin .cnt {
   font-weight: bold;
   paddin-left: 10px;

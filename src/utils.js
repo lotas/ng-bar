@@ -92,6 +92,17 @@ var NgBarUtils = function() {
       } catch (e) {}
 
       return 'none';
+    },
+
+
+    formatObject: function(obj) {
+      var str = '';
+
+      angular.forEach(obj, function(v, k){
+        str += '<b>' + k + '</b>: ' + JSON.stringify(v) +  "\n";
+      });
+
+      return str;
     }
   };
 

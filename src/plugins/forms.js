@@ -51,7 +51,7 @@ function getFieldsInfo(forms) {
 	var html = '';
 
 	angular.forEach(forms, function(form) {
-		var name = form.name || form.attributes['name'].value,
+		var name = form.name || (form.attributes['name'] ? form.attributes['name'].value : 'form'),
 			ngForm = angular.element(form).scope()[name];
 
 		if (!ngForm) {
