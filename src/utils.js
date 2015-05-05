@@ -99,7 +99,7 @@ var NgBarUtils = function() {
       var str = '';
 
       angular.forEach(obj, function(v, k){
-        str += '<b>' + k + '</b>: ' + JSON.stringify(v) +  "\n";
+        str += '<b>' + k + '</b>: ' + JSON.stringify(v, null, 2) +  "\n";
       });
 
       return str;
