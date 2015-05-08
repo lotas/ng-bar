@@ -1,24 +1,23 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * Application-Specific Plugins
- * 
- * window.NgBarASP = [{
- *    title: 'User',
- *    cnt: 'some@user.com',
- *    items: [
- *       'Id: 333',
- *       'Email: some@thing',
- *       'Roles: [a,b,c]'
- *       {title: 'Debug', info: {complex:'debug', info:'here'}}
- *    ]
- * }, {
- *    title: 'Language',
- *    cnt: 'en',
- *    items: [
- *      {title: 'de', onclick: function(){ switchLanguage('de'); }},
- *      {title: 'en', onclick: function(){ switchLanguage('en'); }}
- *    ]
- * }]
+ *
+ * Example:
+ *
+ *   var aspPlugins = [{
+ *        title: 'i18n',
+ *        cnt: function() { return $translate.use(); },
+ *        items: [
+ *            '<a onclick="xlSetLocale(\'de\')">de</a>',
+ *            '<a onclick="xlSetLocale(\'es\')">es</a>',
+ *            '<a onclick="xlSetLocale(\'en\')">en</a>'
+ *        ]
+ *    }];
+ *    if (typeof $window.NgBar !== 'undefined') {
+ *      $window.NgBar.initASP(aspPlugins);
+ *    } else { // delayed init 
+ *        $window.NgBarASP = ($window.NgBarASP || []).concat(aspPlugins);
+ *    }
  * 
  * 
  */
@@ -113,7 +112,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 
     function NgBar() {}
-    NgBar.prototype.version = '1.0.11';
+    NgBar.prototype.version = '1.1.0';
 
     NgBar.prototype.init = function() {     
         this._createContainer();
