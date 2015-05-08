@@ -18,7 +18,24 @@
  *    } else { // delayed init 
  *        $window.NgBarASP = ($window.NgBarASP || []).concat(aspPlugins);
  *    }
+ *
  * 
+ *   User.identity().then(function(id){
+ *           var user = id;
+ *
+ *            // let's add our plugins
+ *           var aspPlugins = [{
+ *               title: 'User',
+ *               cnt: user.username,
+ *               items: user
+ *           }];
+ *
+ *           if (typeof $window.NgBar !== 'undefined') {
+ *               $window.NgBar.initASP(aspPlugins);
+ *           } else {
+ *               $window.NgBarASP = ($window.NgBarASP || []).concat(aspPlugins);
+ *           }
+ *       });
  * 
  */
 
@@ -39,7 +56,7 @@ var NgBarASP = {
     var elm = document.createElement('div'),
         cntId = 'ngbar-asp-' + pluginId,
         subId = 'ngbar-asp-sub-' + pluginId,
-        cnt = angular.isString(plugin.cnt) ? cnt : '..';
+        cnt = angular.isString(plugin.cnt) ? plugin.cnt : '..';
  
     pluginId++;
 
@@ -59,10 +76,12 @@ var NgBarASP = {
       setTimeout(function calcThem(){
         var sub = document.getElementById(subId);
         sub.innerHTML = '';
-        angular.forEach(plugin.items, function(subItem) {
+        angular.forEach(plugin.items, function(subItem, key) {
           var elm = document.createElement('div');
 
-          if (angular.isString(subItem)) {
+          if (angular.isDefined(key) && !angular.isNumber(key)) {
+            elm.innerHTML = '<strong>' + key + '</strong>: ' + JSON.stringify(subItem, null, 2);
+          } else if (angular.isString(subItem)) {
             elm.innerHTML = subItem;
           } else if (subItem.title) {
             elm.innerHTML = subItem.title;
