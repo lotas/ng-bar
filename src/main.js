@@ -2,6 +2,7 @@
     var utils = require('./utils.js')();
     var fs = require('fs');
     var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
+    var ngBarASP = require('./asp.js');
 
     // var _ = require('lodash');
 
@@ -96,6 +97,29 @@
 
             elm.addEventListener('click', self.elmClickHandler);
 
+            self.plugins.push(plugin);
+        });
+
+        if (typeof window.NgBarASP !== 'undefined') {
+            self.initASP(window.NgBarASP);
+        }
+    };
+    /**    
+     * Application Specific Plugins
+     */
+    NgBar.prototype.initASP = function(plugins) {
+        var self = this;
+        angular.forEach(plugins, function(plugin) {
+            var elm = ngBarASP.createInterface(plugin);
+            if (!elm) {
+                return;
+            }
+
+            elm.className = 'ng-bar-plugin';
+            elm.addEventListener('click', self.elmClickHandler);
+
+            self._container.appendChild(elm);
+            plugin._elm = elm;
             self.plugins.push(plugin);
         });
     };
