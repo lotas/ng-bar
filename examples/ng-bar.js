@@ -131,7 +131,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 
     function NgBar() {}
-    NgBar.prototype.version = '1.1.0';
+    NgBar.prototype.version = '1.1.2';
 
     NgBar.prototype.init = function() {     
         this._createContainer();
