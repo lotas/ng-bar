@@ -2,6 +2,7 @@
     var utils = require('./utils.js')();
     var fs = require('fs');
     var cssString = fs.readFileSync(__dirname + '/ng-bar.css', 'utf8');
+    var Plugin = require('./plugin.js');
     var ngBarASP = require('./asp.js');
 
     // var _ = require('lodash');
@@ -23,9 +24,12 @@
     function NgBar() {}
     NgBar.prototype.version = '1.1.2';
 
-    NgBar.prototype.init = function() {     
+    NgBar.prototype.init = function() { 
+        this.plugins = [];
         this._createContainer();
         this._initPlugins();
+
+        this._pollUpdates();
     };
     /**
      * Create main container
@@ -89,6 +93,12 @@
         this.plugins = [];
 
         angular.forEach(ngBarPlugins, function(plugin) {
+            if (angular.isArray(plugin)) {
+                return self.initASP(plugin);
+            } else if (angular.isFunction(plugin) && plugin.asp === true) {
+                return self.initASP(plugin()); // delayed init of function
+            }
+
             var elm = document.createElement('div');
             elm.className = 'ng-bar-plugin';
             self._container.appendChild(elm);
@@ -109,17 +119,15 @@
      */
     NgBar.prototype.initASP = function(plugins) {
         var self = this;
-        angular.forEach(plugins, function(plugin) {
-            var elm = ngBarASP.createInterface(plugin);
-            if (!elm) {
+        angular.forEach(plugins, function(pluginDef) {
+            var plugin = ngBarASP.createInterface(pluginDef);
+            if (!plugin) {
                 return;
             }
 
-            elm.className = 'ng-bar-plugin';
-            elm.addEventListener('click', self.elmClickHandler);
+            plugin.getElement().addEventListener('click', self.elmClickHandler);
 
-            self._container.appendChild(elm);
-            plugin._elm = elm;
+            self._container.appendChild(plugin.getElement());
             self.plugins.push(plugin);
         });
     };
@@ -136,6 +144,19 @@
         }
 
         elm.toggleClass('active');
+    };
+    NgBar.prototype._pluginUpdateInterval = 1000;
+    NgBar.prototype._pollUpdates = function() {
+        var self = this;
+        setTimeout(function updCnts(){
+            angular.forEach(self.plugins, function(plugin){
+                if (typeof plugin.updateCnt === 'function') {
+                    plugin.updateCnt();
+                }
+            });
+
+            setTimeout(updCnts, 1000);
+        }, 1000);
     };
 
 

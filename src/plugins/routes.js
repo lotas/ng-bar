@@ -21,7 +21,7 @@ function initPlugin(elm) {
             routesList.innerHTML = '<h5>ui-router routes</h5><table>' + routes[0] + '</table>';
 
             elm.querySelector('h4').className = 'ui-router';
-        } else {
+        } else if (router === 'ng') {
             var routes = enumerateNgRoutes();
             routerInfo.innerHTML = routes[1].length;
             routesList.innerHTML = '<h5>ngRoute routes</h5><table>' + routes[0] + '</table>';

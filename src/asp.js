@@ -1,6 +1,31 @@
 /**
  * Application-Specific Plugins
  *
+ *
+ * ASP structure: 
+ * {
+ *   title: 'Will be shown on hover',
+ *   background: 'optional background for counter area',
+ *   icon: 'className', // or nothing
+ *   cnt: 42, // number
+ *   cnt: 'value', // or some string
+ *   cnt: function(){ return currentValueOfSomething(); }, // or something callable
+ *   items: [ // some array of values
+ *     'string',
+ *     'or number'
+ *   ], // or an array of objects
+ *   items: [{
+ *       title: 'key',
+ *       info: 'some details',
+ *       onclick: function() {some handler}
+ *     }, {
+ *       title: 'key',
+ *       info: 'some'
+ *     }
+ *   ], // or just an object
+ *   items: userObject     
+ * }
+ *
  * Example:
  *
  *   var aspPlugins = [{
@@ -38,6 +63,7 @@
  * 
  */
 
+var Plugin = require('./plugin.js');
 var pluginId = 1;
 
 var NgBarASP = {
@@ -55,23 +81,19 @@ var NgBarASP = {
     var elm = document.createElement('div'),
         cntId = 'ngbar-asp-' + pluginId,
         subId = 'ngbar-asp-sub-' + pluginId,
+        optStyles = plugin.background ? ' style="background:' + plugin.background + '" ' : '',
         cnt = angular.isString(plugin.cnt) ? plugin.cnt : '..';
  
+    elm.className = 'ng-bar-plugin';
+
     pluginId++;
 
     elm.innerHTML = '<h4><i class="help">' + plugin.title + ':</i>' + 
-      '<span id="' + cntId + '">' + cnt + '</span></h4>' +
-      '<div class="sub" id="' + subId + '"></div>';
-
-
-    if (angular.isFunction(plugin.cnt)) {
-      var fn = plugin.cnt;
-      setTimeout(function updCnt(){
-        document.getElementById(cntId).innerHTML = fn();
-      }, 1000);
-    }
+      '<span id="' + cntId + '"' + optStyles + '>' + cnt + '</span></h4>';
 
     if (plugin.items) {
+      elm.innerHTML += '<div class="sub" id="' + subId + '"></div>';
+
       setTimeout(function calcThem(){
         var sub = document.getElementById(subId);
         sub.innerHTML = '';
@@ -98,7 +120,7 @@ var NgBarASP = {
       }, 100);
     }
 
-    return elm;
+    return new Plugin(cntId, plugin, elm);
   }
 
 };

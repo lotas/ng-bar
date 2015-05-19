@@ -1,5 +1,55 @@
 var utils = require('../utils.js')();
 
+function getInfo() {
+    var pluginInfo = [];
+    var router = utils.detectRouter();
+
+    if (router === 'ui') {
+        var $state = utils.getService('$state'),
+            $params = utils.getService('$stateParams');
+        
+        var stateName = $state.current && $state.current.name;
+
+        pluginInfo.push({
+            title: 'State',
+            cnt: function() { return stateName; },
+            items: [
+            ]
+        });
+
+        utils.getService('$rootScope')
+             .$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+                stateName = toState.name;
+             }); 
+    } else if (router === 'ng') {
+        var $route = utils.getService('$route'),
+            $loc = utils.getService('$location'),
+            ctrl = $route.current && $route.current.$$route ? $route.current.$$route.controller : '?',
+            routeName = $route.current.$$route && $route.current.$$route.templateUrl;
+
+        pluginInfo.push({
+            title: 'Route',
+            cnt: function() { return routeName; },
+            items: [
+            ]
+        });
+
+        utils.getService('$rootScope')
+             .$on('$routeChangeSuccess', function(evt, current, previous) {
+                routeName = current.templateUrl;
+             });
+    }
+
+    return pluginInfo;
+}
+
+
+if (typeof module !== "undefined" && module.exports) {
+    getInfo.asp = true;
+    module.exports = getInfo;
+}
+
+
 /**
  *  Routes debug
  */
@@ -52,6 +102,3 @@ function initPlugin(elm) {
 
 
 
-if (typeof module !== "undefined" && module.exports) {
-    module.exports = initPlugin;
-}
