@@ -340,6 +340,18 @@ if (typeof module !== "undefined" && module.exports) {
 },{}],4:[function(require,module,exports){
 var utils = require('../utils.js')();
 
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = [{
+		title: 'angular',
+		cnt: angular.version.full,
+		items: [
+			
+		]
+	}];
+	
+	
+}
+/*
 
 function initPlugin(elm) {	
 	elm.innerHTML = '<h4 title="'+angular.version.codeName+'">' + angular.version.full + '</h4><div class="sub" id="ngbar-app-deps"></div>';
@@ -402,7 +414,7 @@ function onDepClickHandler(e){
 if (typeof module !== "undefined" && module.exports) {
 	module.exports = initPlugin;
 }
-
+*/
 },{"../utils.js":10}],5:[function(require,module,exports){
 var utils = require('../utils.js')();
 
