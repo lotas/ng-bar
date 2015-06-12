@@ -83,6 +83,8 @@ var NgBarASP = {
         subId = 'ngbar-asp-sub-' + pluginId,
         optStyles = plugin.background ? ' style="background:' + plugin.background + '" ' : '',
         cnt = angular.isString(plugin.cnt) ? plugin.cnt : '..';
+
+    var pluginInstance = new Plugin(cntId, plugin, elm);
  
     elm.className = 'ng-bar-plugin';
 
@@ -95,11 +97,21 @@ var NgBarASP = {
       elm.innerHTML += '<div class="sub" id="' + subId + '"></div>';
 
       setTimeout(function calcThem(){
-        var sub = document.getElementById(subId);
+        var id = 0,
+            sub = document.getElementById(subId);
+            
         sub.innerHTML = '';
+        
         angular.forEach(plugin.items, function(subItem, key) {
           var elm = document.createElement('div');
-
+          
+          // assign id if it doesn't exist to help find reference later
+          if (typeof subItem.id === 'undefined') {
+            subItem.id = 'ngb-' + pluginId + '-' + (++id);
+          }
+          
+          elm.setAttribute('id', subItem.id);
+          
           if (angular.isDefined(key) && !angular.isNumber(key)) {
             elm.innerHTML = '<strong>' + key + '</strong>: ' + JSON.stringify(subItem, null, 2);
           } else if (angular.isString(subItem)) {
@@ -107,10 +119,15 @@ var NgBarASP = {
           } else if (subItem.title) {
             elm.innerHTML = subItem.title;
             if (subItem.onclick) {
-              elm.addEventListener(subItem.onclick);
+              elm.addEventListener('click', subItem.onclick);
             }
             if (subItem.info) {
               elm.innerHTML += "\n<pre>" + JSON.stringify(subItem.info, null, 2) + "</pre>";
+            }
+            if (subItem.items) {
+              elm.addEventListener('click', function(){
+                  console.log(subItem.id, pluginInstance.getSubItemDetails(subItem.id));
+              });
             }
           }
 
@@ -120,7 +137,7 @@ var NgBarASP = {
       }, 100);
     }
 
-    return new Plugin(cntId, plugin, elm);
+    return pluginInstance;
   }
 
 };

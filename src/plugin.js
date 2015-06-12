@@ -25,6 +25,18 @@ Plugin.prototype.updateCnt = function() {
   }
 };
 
+Plugin.prototype.getSubItemDetails = function(id) {
+  var subItems = false;
+  if (id && this.def.items) {
+    angular.forEach(this.def.items, function(elm) {
+      if (elm.id === id) {
+        subItems = elm.items;
+      }
+    });
+  }
+  return subItems;
+};
+
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = Plugin;
