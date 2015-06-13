@@ -64,6 +64,7 @@
  */
 
 var Plugin = require('./plugin.js');
+var utils = require('./utils.js')();
 var pluginId = 1;
 
 var NgBarASP = {
@@ -81,6 +82,7 @@ var NgBarASP = {
     var elm = document.createElement('div'),
         cntId = 'ngbar-asp-' + pluginId,
         subId = 'ngbar-asp-sub-' + pluginId,
+        subSubId = 'ngbar-asp-ssub-' + pluginId,
         optStyles = plugin.background ? ' style="background:' + plugin.background + '" ' : '',
         cnt = angular.isString(plugin.cnt) ? plugin.cnt : '..';
 
@@ -94,7 +96,10 @@ var NgBarASP = {
       '<span id="' + cntId + '"' + optStyles + '>' + cnt + '</span></h4>';
 
     if (plugin.items) {
+      // main items container
       elm.innerHTML += '<div class="sub" id="' + subId + '"></div>';
+      // one for sub-items
+      elm.innerHTML += '<div class="sub hidden" id="' + subSubId + '"></div>';      
 
       setTimeout(function calcThem(){
         var id = 0,
@@ -103,36 +108,76 @@ var NgBarASP = {
         sub.innerHTML = '';
         
         angular.forEach(plugin.items, function(subItem, key) {
-          var elm = document.createElement('div');
+          var itemElm = document.createElement('div');
           
           // assign id if it doesn't exist to help find reference later
           if (typeof subItem.id === 'undefined') {
             subItem.id = 'ngb-' + pluginId + '-' + (++id);
           }
           
-          elm.setAttribute('id', subItem.id);
+          itemElm.setAttribute('id', subItem.id);
           
           if (angular.isDefined(key) && !angular.isNumber(key)) {
-            elm.innerHTML = '<strong>' + key + '</strong>: ' + JSON.stringify(subItem, null, 2);
+            itemElm.innerHTML = '<strong>' + key + '</strong>: ' + JSON.stringify(subItem, null, 2);
           } else if (angular.isString(subItem)) {
-            elm.innerHTML = subItem;
+            itemElm.innerHTML = subItem;
           } else if (subItem.title) {
-            elm.innerHTML = subItem.title;
+            itemElm.innerHTML = subItem.title;
             if (subItem.onclick) {
-              elm.addEventListener('click', subItem.onclick);
+              itemElm.addEventListener('click', subItem.onclick);
             }
             if (subItem.info) {
-              elm.innerHTML += "\n<pre>" + JSON.stringify(subItem.info, null, 2) + "</pre>";
+              itemElm.innerHTML += "\n<pre>" + JSON.stringify(subItem.info, null, 2) + "</pre>";
             }
             if (subItem.items) {
-              elm.addEventListener('click', function(){
-                  console.log(subItem.id, pluginInstance.getSubItemDetails(subItem.id));
-              });
+              itemElm.addEventListener('click', onItemClickHandler);
             }
           }
 
-          sub.appendChild(elm);
+          sub.appendChild(itemElm);
         });
+        
+        /**
+         * Show sub-item details
+         */
+        function onItemClickHandler(evt) {
+           var id = evt.target.id, 
+               subSub = document.getElementById(subSubId);
+              
+           subSub.style.marginLeft = sub.offsetWidth + 'px';
+           subSub.style.height = sub.offsetHeight + 'px';
+           subSub.classList.remove('hidden');
+           
+           subSub.innerHTML = formatItemDetails(
+             pluginInstance.getSubItemDetails(id)
+           );
+        }
+        
+        /**
+         * Format sub-item details
+         * @param {Array|Object} details
+         * @return {String}
+         */
+        function formatItemDetails(details) {
+          var html = '';
+          if (angular.isArray(details)) {
+            html +=  '<pre>' + utils.formatObject(subItems) + '</pre>';
+          } else if (angular.isObject(details)) {
+            html += '<ul>';
+            angular.forEach(details, function(elm, key) {
+               html += '<li><b>' + key + '</b></li>';
+               if (angular.isArray(elm)) {
+                 angular.forEach(elm, function(k, v) {
+                   html += '<li>' + k + '</li>';
+                 });
+               } else {
+                html += '<li>' + elm + '</li>';
+               }
+            });
+            html += '</ul>';
+          }
+          return html;
+        }
 
       }, 100);
     }

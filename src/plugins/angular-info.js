@@ -20,7 +20,9 @@ if (typeof module !== 'undefined' && module.exports) {
 			
 			deps.push({
 				title: elm + '&nbsp;(' + servicesCount + ')',
-				items: buildDepDetails(elm) 
+				items: {
+					'Services': buildDepDetails(elm)
+				} 
 			});
 		});
 	

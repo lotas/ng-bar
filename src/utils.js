@@ -54,7 +54,7 @@ var NgBarUtils = function() {
       if (window.performance && window.performance.memory) {
         return bytesToSize(window.performance.memory.totalJSHeapSize);
       } else {
-        return '<i class="missing">performance.memory missing</i>';
+        return false;
       }
     },
 

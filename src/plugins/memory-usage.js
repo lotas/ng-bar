@@ -8,9 +8,6 @@ var utils = require('../utils.js')();
  * [chrome.executable] --args --enable-precise-memory-info 
  */
 var pluginInfo = [{
-	title: 'Mem', 
-	cnt: function() { return utils.getMemUsage(); }
-}, {
 	title: 'Scopes',
 	background: '#EAEEF8',
 	cnt: function() { return utils.getScopesInfo().count; }
@@ -19,6 +16,14 @@ var pluginInfo = [{
 	background: '#FFF5F8',
 	cnt: function() { return utils.getScopesInfo().watchers; }
 }];
+
+if (utils.getMemUsage() !== false) {
+	pluginInfo.unshift({
+		title: 'Mem',
+		background: '',
+		cnt: utils.getMemUsage
+	});
+}
 
 
 if (typeof module !== "undefined" && module.exports) {
