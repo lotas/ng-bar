@@ -153,6 +153,10 @@
                 if (typeof plugin.updateCnt === 'function') {
                     plugin.updateCnt();
                 }
+                
+                if (typeof plugin.renderItems === 'function') {
+                    plugin.renderItems();
+                }
             });
 
             setTimeout(updCnts, 1000);

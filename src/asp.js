@@ -86,7 +86,7 @@ var NgBarASP = {
         optStyles = plugin.background ? ' style="background:' + plugin.background + '" ' : '',
         cnt = angular.isString(plugin.cnt) ? plugin.cnt : '..';
 
-    var pluginInstance = new Plugin(cntId, plugin, elm);
+    var pluginInstance = new Plugin(cntId, plugin, elm, pluginId);
  
     elm.className = 'ng-bar-plugin';
 
@@ -101,85 +101,7 @@ var NgBarASP = {
       // one for sub-items
       elm.innerHTML += '<div class="sub hidden" id="' + subSubId + '"></div>';      
 
-      setTimeout(function calcThem(){
-        var id = 0,
-            sub = document.getElementById(subId);
-            
-        sub.innerHTML = '';
-        
-        angular.forEach(plugin.items, function(subItem, key) {
-          var itemElm = document.createElement('div');
-          
-          // assign id if it doesn't exist to help find reference later
-          if (typeof subItem.id === 'undefined') {
-            subItem.id = 'ngb-' + pluginId + '-' + (++id);
-          }
-          
-          itemElm.setAttribute('id', subItem.id);
-          
-          if (angular.isDefined(key) && !angular.isNumber(key)) {
-            itemElm.innerHTML = '<strong>' + key + '</strong>: ' + JSON.stringify(subItem, null, 2);
-          } else if (angular.isString(subItem)) {
-            itemElm.innerHTML = subItem;
-          } else if (subItem.title) {
-            itemElm.innerHTML = subItem.title;
-            if (subItem.onclick) {
-              itemElm.addEventListener('click', subItem.onclick);
-            }
-            if (subItem.info) {
-              itemElm.innerHTML += "\n<pre>" + JSON.stringify(subItem.info, null, 2) + "</pre>";
-            }
-            if (subItem.items) {
-              itemElm.addEventListener('click', onItemClickHandler);
-            }
-          }
-
-          sub.appendChild(itemElm);
-        });
-        
-        /**
-         * Show sub-item details
-         */
-        function onItemClickHandler(evt) {
-           var id = evt.target.id, 
-               subSub = document.getElementById(subSubId);
-              
-           subSub.style.marginLeft = sub.offsetWidth + 'px';
-           subSub.style.height = sub.offsetHeight + 'px';
-           subSub.classList.remove('hidden');
-           
-           subSub.innerHTML = formatItemDetails(
-             pluginInstance.getSubItemDetails(id)
-           );
-        }
-        
-        /**
-         * Format sub-item details
-         * @param {Array|Object} details
-         * @return {String}
-         */
-        function formatItemDetails(details) {
-          var html = '';
-          if (angular.isArray(details)) {
-            html +=  '<pre>' + utils.formatObject(subItems) + '</pre>';
-          } else if (angular.isObject(details)) {
-            html += '<ul>';
-            angular.forEach(details, function(elm, key) {
-               html += '<li><b>' + key + '</b></li>';
-               if (angular.isArray(elm)) {
-                 angular.forEach(elm, function(k, v) {
-                   html += '<li>' + k + '</li>';
-                 });
-               } else {
-                html += '<li>' + elm + '</li>';
-               }
-            });
-            html += '</ul>';
-          }
-          return html;
-        }
-
-      }, 100);
+      setTimeout(pluginInstance.renderItems.bind(pluginInstance), 1000);
     }
 
     return pluginInstance;
